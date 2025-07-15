@@ -14,9 +14,11 @@ import AboutMe from "../../Imges/AboutMe.png";
 import { FaCar, FaHome, FaGraduationCap } from "react-icons/fa";
 import { UploadedClientDocuments } from "../../Types/TDocuments.ts";
 
+type PathwayType = 'single' | 'couple' | 'business';
+
 const HomePage = () => {
 
-    const [selectedPathway, setSelectedPathway] = useState('single');
+    const [selectedPathway, setSelectedPathway] = useState<PathwayType | null>('single');
     const [uploadedFiles, setUploadedFiles] = useState<{ [key: string]: File[] }>({});
     const [nameInput, setNameInput] = useState('');
 
@@ -30,7 +32,7 @@ const HomePage = () => {
 
     ];
         
-    const inputDetails = {
+    const inputDetails: Record<PathwayType, { label: string; placeholder: string }> = {
         single: { label: 'שם מלא', placeholder: 'הזינו את שמכם המלא' },
         couple: { label: 'שם משפחה', placeholder: 'הזינו את שם המשפחה' },
         business: { label: 'שם העסק', placeholder: 'הזינו את שם העסק' },
@@ -48,14 +50,14 @@ const HomePage = () => {
         setNameInput('');
     }, [selectedPathway]);
 
-    const currentInput = inputDetails[selectedPathway];
+    const currentInput = selectedPathway ? inputDetails[selectedPathway] : null;
 
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
             await axios.post(`${import.meta.env.VITE_API_URL}/users/contact`, {
@@ -79,7 +81,7 @@ const HomePage = () => {
                 timer: 1500,
             });
         }
-      };
+    };
 
     const handleFileUpload = (documentName: string, event: React.ChangeEvent<HTMLInputElement>) => {
         const files = Array.from(event.target.files || []);
@@ -364,7 +366,7 @@ const HomePage = () => {
                 <div className="flex flex-col gap-4 mb-8 md:hidden">
                     {['single', 'couple', 'business'].map((path) => (
                         <div key={path} className="overflow-hidden border border-gray-300 rounded-lg">
-                            <button onClick={() => setSelectedPathway(path === selectedPathway ? '' : path)} className="w-full text-right px-6 py-4 flex items-center justify-between text-lg font-semibold bg-white text-[#3B3024] hover:bg-gray-50 transition-colors duration-300">
+                            <button onClick={() => setSelectedPathway(path === selectedPathway ? null : path as PathwayType)} className="w-full text-right px-6 py-4 flex items-center justify-between text-lg font-semibold bg-white text-[#3B3024] hover:bg-gray-50 transition-colors duration-300">
                                 <span className="flex items-center gap-2">
                                     {path === 'single' && <FaUser />}
                                     {path === 'couple' && <FaUsers />}
