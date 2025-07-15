@@ -123,6 +123,12 @@ const HomePage = () => {
                 title: "הקבצים הועלו",
                 text: "הקבצים נשמרו בהצלחה",
                 timer: 1500,
+                willClose: () => {
+                    if ("scrollRestoration" in history) {
+                        history.scrollRestoration = "manual";
+                    }
+                    window.location.reload();
+                }
             });
         } catch (err) {
             console.error(err);
@@ -131,6 +137,12 @@ const HomePage = () => {
                 title: "שגיאה",
                 text: "העלאת הקבצים נכשלה",
                 timer: 1500,
+                willClose: () => {
+                    if ("scrollRestoration" in history) {
+                        history.scrollRestoration = "manual";
+                    }
+                    window.location.reload();
+                }
             });
         }
     };
@@ -178,7 +190,7 @@ const HomePage = () => {
             </div>
 
             {/* Hero Section */}
-            <motion.section id="hero" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1 }}
+            <motion.section id="logo" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1 }}
                 viewport={{ once: true }} className="h-[100vh] flex items-center justify-center">
                 <motion.img
                     initial={{ opacity: 0, scale: 0.8 }}

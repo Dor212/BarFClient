@@ -2,13 +2,10 @@ import { Navbar } from "flowbite-react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { TRootState } from "../../../Store/BigPie";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { decode } from "../../../Services/tokenServices.ts";
-import { userActions } from "../../../Store/UserSlice.ts";
+import { useState } from "react";
+import { userActions } from "../../../Store/UserSlice";
 
 const Header = () => {
-  const { VITE_API_URL } = import.meta.env;
   const [isOpen, setIsOpen] = useState(false);
   const user = useSelector((state: TRootState) => state.UserSlice.user);
   const location = useLocation().pathname;
@@ -17,6 +14,7 @@ const Header = () => {
 
   const logout = () => {
     dispatch(userActions.logout());
+    localStorage.removeItem("token");  
     nav("/");
   };
 
@@ -24,37 +22,23 @@ const Header = () => {
     setIsOpen(prev => !prev);
   };
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      try {
-        const decoded = decode(token);
-
-        // כאן זה החלק החשוב ששמנו אותו כמו שצריך
-        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-
-        axios.get(`${VITE_API_URL}/users/${decoded._id}`)
-          .then(res => {
-            if (res.data && res.data._id) {
-              dispatch(userActions.login(res.data));
-            } else {
-              localStorage.removeItem("token");
-            }
-          })
-          .catch(() => localStorage.removeItem("token"));
-      } catch {
-        localStorage.removeItem("token");
-      }
-    }
-  }, [VITE_API_URL, dispatch]);
-
   return (
     <Navbar
       fluid
       rounded
       className="fixed top-0 left-0 z-50 w-full bg-[#063942]/90 backdrop-blur-md shadow-md"
     >
-      <Navbar.Brand as={Link} to="/home" className="flex items-center gap-3">
+      <Navbar.Brand
+        as="button"
+        onClick={() => {
+          if ("scrollRestoration" in history) {
+            history.scrollRestoration = "manual";
+          }
+          window.scrollTo({ top: 0, behavior: "smooth" });
+          window.location.href = "/home";
+        }}
+        className="flex items-center gap-3 cursor-pointer"
+      >
         <img
           src="/backgrounds/BarFLogo2.png"
           alt="Bar Logo"
