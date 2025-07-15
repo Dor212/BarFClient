@@ -16,7 +16,6 @@ import { UploadedClientDocuments } from "../../Types/TDocuments.ts";
 
 const HomePage = () => {
 
-    const { VITE_API_URL } = import.meta.env;
     const [selectedPathway, setSelectedPathway] = useState('single');
     const [uploadedFiles, setUploadedFiles] = useState<{ [key: string]: File[] }>({});
     const [nameInput, setNameInput] = useState('');
