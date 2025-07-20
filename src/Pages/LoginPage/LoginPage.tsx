@@ -31,12 +31,11 @@ const LoginPage = () => {
     });
     const onSubmit = async (form: typeof initialData) => {
         try {
-            const token = await axios.post(VITE_API_URL + "/users/login", form);
-            const tokenStr = token.data.token;
+            const tokenRes = await axios.post(VITE_API_URL + "/users/login", form);
+            const tokenStr = tokenRes.data.token;
             localStorage.setItem("token", tokenStr);
+            axios.defaults.headers.common["Authorization"] = `Bearer ${tokenStr}`;
             const decoded = decode(tokenStr);
-            axios.defaults.headers.common["x-auth-token"] = tokenStr;
-
             const userResponse = await axios.get(`${VITE_API_URL}/users/${decoded._id}`);
             dispatch(userActions.login(userResponse.data));
 
