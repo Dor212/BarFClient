@@ -275,7 +275,11 @@ const HomePage = () => {
                     effect="coverflow"
                     navigation
                     centeredSlides
-                    initialSlide={Math.floor(imageSwiper.length / 2)}
+                    initialSlide={
+                        imageSwiper.findIndex((img) => img._id === "pic1") !== -1
+                            ? imageSwiper.findIndex((img) => img._id === "pic1")
+                            : 0
+                    }
                     slidesPerView={"auto"}
                     spaceBetween={20}
                     coverflowEffect={{
