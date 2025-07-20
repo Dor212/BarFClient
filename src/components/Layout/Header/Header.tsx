@@ -35,7 +35,7 @@ const Header = () => {
             history.scrollRestoration = "manual";
           }
           window.scrollTo({ top: 0, behavior: "smooth" });
-          window.location.href = "/home";
+          nav("/");
         }}
         className="flex items-center gap-3 cursor-pointer"
       >
