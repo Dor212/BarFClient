@@ -5,15 +5,15 @@ import { decode } from "../../Services/tokenServices";
 import { userActions } from "../../Store/UserSlice";
 
 const AuthLoader = () => {
-    const dispatch = useDispatch();
     const { VITE_API_URL } = import.meta.env;
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const token = localStorage.getItem("token");
         console.log("🚀 AuthLoader found token in localStorage:", token);
 
         if (token) {
-            axios.defaults.headers.common["x-auth-token"] = token;
+            axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
             try {
                 const decoded = decode(token);
