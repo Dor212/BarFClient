@@ -213,10 +213,8 @@ const HomePage = () => {
                 className="container flex flex-col-reverse items-center justify-center gap-10 px-5 py-20 mx-auto md:flex-row"
                 dir="rtl"
             >
-                <div className="w-full text-center text-[#063942] md:w-1/2 heebo-p1  ">
-                    <h2 className="text-3xl md:text-5xl font-semibold text-[#D1F96D] whitespace-nowrap">
-                        היי אני בר פליישקר
-                    </h2>
+                <div className="w-full text-center text-[#063942] md:w-1/2 heebo-p1 ">
+                    <h2 className="mb-4 text-5xl font-semibold text-[#D1F96D]">היי אני בר פליישקר</h2>
                     <h3 className="mb-4 text-3xl font-semibold">יועץ פיננסי מוסמך</h3>
                     <p className="max-w-lg mx-auto mb-8 text-sm leading-relaxed hebrew-content">
                         החיבור שלי לעולם הפיננסים היה שם תמיד,
@@ -255,10 +253,11 @@ const HomePage = () => {
                             בלי מורכבות מיותרת
                         </span>
                         <br /><br />
-                    </p>
-                        <span className="text-xl md:text-3xl text-[#D1F96D] whitespace-nowrap">
-                            פשוט תהליך ברור, מותאם אישית, שמביא תוצאות.
+                        <span className="text-3xl text-[#D1F96D] ">
+                            פשוט תהליך ברור,
+                            מותאם אישית, שמביא תוצאות.
                         </span>
+                    </p>
                 </div>
                 <div className="w-full md:w-1/2">
                     <img
