@@ -11,7 +11,7 @@ import "swiper/css/navigation";
 import "swiper/css/effect-coverflow";
 import { TContactFormData } from "../../Types/TContactFromData.ts";
 import AboutMe from "../../Imges/AboutMe.png";
-import { FaCar, FaHome, FaGraduationCap } from "react-icons/fa";
+import { FaCar } from "react-icons/fa";
 import { UploadedClientDocuments } from "../../Types/TDocuments.ts";
 
 type PathwayType = 'single' | 'couple' | 'business';
@@ -192,7 +192,7 @@ const HomePage = () => {
 
             {/* Hero Section */}
             <motion.section id="logo" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1 }}
-                viewport={{ once: true }} className="h-[100vh] flex items-center justify-center">
+                viewport={{ once: true }} className="h-[100vh] flex items-center justify-center py-2 md:py-0 ">
                 <motion.img
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
@@ -214,26 +214,34 @@ const HomePage = () => {
                 dir="rtl"
             >
                 <div className="w-full text-center text-[#063942] md:w-1/2 heebo-p1 ">
-                    <h2 className="mb-4 text-5xl font-semibold text-[#D1F96D]">היי אני בר פליישקר</h2>
-                    <h3 className="mb-4 text-3xl font-semibold">יועץ פיננסי מוסמך</h3>
+                    <h2 className="mb-4 text-2xl font-semibold text-[#063942]">היי אני בר פליישקר</h2>
+                    <h3 className="mb-4 text-3xl font-bold">יועץ פיננסי מוסמך</h3>
                     <p className="max-w-lg mx-auto mb-8 text-sm leading-relaxed hebrew-content">
                         החיבור שלי לעולם הפיננסים היה שם תמיד,
                         <br />
-                        אבל מה שבאמת הניע אותי – הייתה ההבנה הפשוטה והעוצמתית:
+                        אבל מה שבאמת הניע אותי <br></br> הייתה ההבנה הפשוטה והעוצמתית:
                         <br />
                         ניהול נכון של כסף יכול לשנות חיים,
+                        <br></br>
                         לתת שקט, להביא ביטחון, ליצור חופש.
                         <br />
-                        לאורך השנים צברתי ניסיון מעשי בעולמות הפיננסיים –
-                        התחלתי את הדרך שלי לאחר שירות צבאי מאתגר ומשמעותי,
+                        <br></br>
+                        לאורך השנים צברתי ניסיון מעשי בעולמות הפיננסיים 
+                        התחלתי את הדרך שלי לאחר שירות צבאי
+                        <br></br> מאתגר ומשמעותי,
                         ומאז הספקתי לעבוד
                         <br /> בבית ההשקעות פסגות בתחום הפנסיוני,
                         <br />בחברת אופקים פיננסיים בתחום המט”ח,
                         <br /> ובחברת חכם לייעוץ משכנתאות והלוואות.
                         <br />
-                        במקביל, ניהלתי את הכספים שלי בצורה יסודית –
-                        <br />עם תקציב אישי מדויק, מעקב שוטף ותיק השקעות עצמאי שבניתי צעד אחר צעד.
-                        עשיתי את זה קודם כל עבור עצמי, מתוך הבנה שאי אפשר לייעץ לאחרים באמת –
+                        <br></br>
+                        במקביל, ניהלתי את הכספים שלי בצורה יסודית 
+                        <br />עם תקציב אישי מדויק, מעקב שוטף
+                        <br></br> ותיק השקעות עצמאי שבניתי צעד אחר צעד.
+                        <br></br>
+                        עשיתי את זה קודם כל עבור עצמי,
+                        <br></br>
+                        מתוך הבנה שאי אפשר לייעץ לאחרים באמת <br></br>
                         בלי ליישם את אותם העקרונות בחיים האישיים.
                         <br />
                         אבל דווקא מכל המספרים, האקסלים והטבלאות
@@ -241,22 +249,25 @@ const HomePage = () => {
                         הבנתי שהשליחות האמיתית שלי היא הקשר האישי.
                         <br />
                         היכולת לדבר בגובה העיניים עם אנשים
+                        <br></br>
                         ולעזור להם להבין,
-                        <br /> לנהל ולכוון את הכסף שלהם – בצורה שמתאימה להם.
+                         לנהל ולכוון את הכסף שלהם בצורה שמתאימה להם.
                         <br /><br /><br />
-                        <span className="text-lg">
-                            אני מלווה היום משפחות צעירות, רווקים ורווקות, בעלי ובעלות עסקים
+                        <span className="text-2xl text-[#063942] font-semibold ">
+                            אני מלווה היום משפחות צעירות, רווקים ורווקות,
+                            <br></br> בעלי ובעלות עסקים.
                             <br />
                             כל אחד ואחת שמרגישים שהגיע הזמן לקחת שליטה על החיים הפיננסיים שלהם.
                             <br />
-                            בלי שיפוטיות,
-                            בלי מורכבות מיותרת
                         </span>
-                        <br /><br />
                     </p>
-                        <span className="text-3xl text-[#D1F96D] ">
+                    <span className="text-1xl text-[#063942] ">
+                        בלי שיפוטיות,
+                        בלי מורכבות מיותרת
+                        <br></br>
                             פשוט תהליך ברור,
-                            מותאם אישית, שמביא תוצאות.
+                            מותאם אישית,
+                            <br></br> שמביא תוצאות.
                         </span>
                 </div>
                 <div className="w-full md:w-1/2">
@@ -318,31 +329,14 @@ const HomePage = () => {
                 <div className="grid grid-cols-1 gap-8 md:grid-cols-3 heebo-p1">
                     <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-md">
                         <div className="mb-4 text-5xl text-[#063942]"><FaCar /></div>
-                        <h3 className="mb-2 text-2xl font-semibold text-[#3B3024]">ניהול תקציב נכון</h3>
+                        <h3 className="mb-2 text-2xl font-semibold text-[#3B3024]">מדריך להתנהלות כלכלית בריאה</h3>
                         <p className="mb-4 text-sm leading-relaxed text-gray-700">ללמוד איך לתכנן ולעקוב אחרי ההוצאות וההכנסות שלכם בצורה יעילה, כדי להשיג שליטה מלאה על הכסף.</p>
                         <a href="/path/to/your/article1.pdf" download className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white bg-[#D1F96D] rounded-md hover:bg-[#7a9d46] transition-colors duration-200">
                             הורד מאמר
                             <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                         </a>
                     </div>
-                    <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-md">
-                        <div className="mb-4 text-5xl text-[#063942]"><FaHome /></div>
-                        <h3 className="mb-2 text-2xl font-semibold text-[#3B3024]">השקעות למתחילים</h3>
-                        <p className="mb-4 text-sm leading-relaxed text-gray-700">מדריך מקיף לצעדים הראשונים בעולם ההשקעות, כולל סוגי השקעות נפוצים וטיפים חשובים.</p>
-                        <a href="/path/to/your/article2.pdf" download className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white bg-[#D1F96D] rounded-md hover:bg-[#7a9d46] transition-colors duration-200">
-                            הורד מאמר
-                            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                        </a>
-                    </div>
-                    <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-md">
-                        <div className="mb-4 text-5xl text-[#063942]"><FaGraduationCap /></div>
-                        <h3 className="mb-2 text-2xl font-semibold text-[#3B3024]">בניית תוכנית פיננסית</h3>
-                        <p className="mb-4 text-sm leading-relaxed text-gray-700">ללמוד איך לבנות תוכנית פיננסית אישית שתעזור לכם להשיג את היעדים הכלכליים שלכם.</p>
-                        <a href="/path/to/your/article3.pdf" download className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white bg-[#D1F96D] rounded-md hover:bg-[#7a9d46] transition-colors duration-200">
-                            הורד מאמר
-                            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                        </a>
-                    </div>
+                    
                 </div>
             </motion.section>
 
