@@ -175,7 +175,7 @@ const HomePage = () => {
                 backgroundSize: "contain",
                 backgroundPosition: "right top",
                 backgroundAttachment: "fixed",
-                backgroundColor: "#EBFFD8",
+                backgroundColor: "#FFF8F8",
             }}>
             {/* Social Media Buttons */}
             <div className="fixed-social-buttons">
