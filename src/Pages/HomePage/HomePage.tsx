@@ -213,7 +213,7 @@ const HomePage = () => {
                 className="container flex flex-col-reverse items-center justify-center gap-10 px-5 py-20 mx-auto md:flex-row"
                 dir="rtl"
             >
-                <div className="w-full text-center text-[#063942] md:w-1/2 heebo-p1 flex flex-col md:flex-row items-center justify-center flex-wrap gap-2 text-center ">
+                <div className="w-full text-center text-[#063942] md:w-1/2 heebo-p1  ">
                     <h2 className="text-3xl md:text-5xl font-semibold text-[#D1F96D] whitespace-nowrap">
                         היי אני בר פליישקר
                     </h2>
