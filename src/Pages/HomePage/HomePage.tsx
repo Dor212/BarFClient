@@ -253,11 +253,11 @@ const HomePage = () => {
                             בלי מורכבות מיותרת
                         </span>
                         <br /><br />
+                    </p>
                         <span className="text-3xl text-[#D1F96D] ">
                             פשוט תהליך ברור,
                             מותאם אישית, שמביא תוצאות.
                         </span>
-                    </p>
                 </div>
                 <div className="w-full md:w-1/2">
                     <img
