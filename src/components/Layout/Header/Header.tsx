@@ -2,7 +2,7 @@ import { Navbar } from "flowbite-react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { TRootState } from "../../../Store/BigPie";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { userActions } from "../../../Store/UserSlice";
 
 const Header = () => {
@@ -12,15 +12,26 @@ const Header = () => {
   const dispatch = useDispatch();
   const nav = useNavigate();
 
+
+  useEffect(() => {
+    const cls = "menu-open";
+    if (isOpen) document.body.classList.add(cls);
+    else document.body.classList.remove(cls);
+    return () => document.body.classList.remove(cls);
+  }, [isOpen]);
+
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location]);
+
   const logout = () => {
     dispatch(userActions.logout());
-    localStorage.removeItem("token");  
+    localStorage.removeItem("token");
     nav("/");
   };
 
-  const toggleNavbar = () => {
-    setIsOpen(prev => !prev);
-  };
+  const toggleNavbar = () => setIsOpen(prev => !prev);
 
   return (
     <Navbar
@@ -31,9 +42,7 @@ const Header = () => {
       <Navbar.Brand
         as="button"
         onClick={() => {
-          if ("scrollRestoration" in history) {
-            history.scrollRestoration = "manual";
-          }
+          if ("scrollRestoration" in history) history.scrollRestoration = "manual";
           window.scrollTo({ top: 0, behavior: "smooth" });
           nav("/");
         }}
@@ -49,24 +58,23 @@ const Header = () => {
       <Navbar.Toggle onClick={toggleNavbar} />
 
       <Navbar.Collapse
-        className={`${isOpen ? "block" : "hidden"
-          } md:flex md:items-center md:space-x-6 text-lg`}
+        className={`${isOpen ? "block" : "hidden"} md:flex md:items-center md:space-x-6 text-lg`}
       >
         {!user && (
           <>
             <Navbar.Link
               as={Link}
               to="/register"
-              className={`hover:underline hover:text-[#97BE5A] !text-white !text-2xl ${location === "/register" ? "font-bold" : ""
-                }`}
+              onClick={() => setIsOpen(false)} // ← נסגור תפריט
+              className={`hover:underline hover:text-[#97BE5A] !text-white !text-2xl ${location === "/register" ? "font-bold" : ""}`}
             >
               הרשמה
             </Navbar.Link>
             <Navbar.Link
               as={Link}
               to="/login"
-              className={`hover:underline hover:text-[#97BE5A] !text-white !text-2xl ${location === "/login" ? "font-bold" : ""
-                }`}
+              onClick={() => setIsOpen(false)} // ← נסגור תפריט
+              className={`hover:underline hover:text-[#97BE5A] !text-white !text-2xl ${location === "/login" ? "font-bold" : ""}`}
             >
               התחבר
             </Navbar.Link>
@@ -77,8 +85,8 @@ const Header = () => {
           <Navbar.Link
             as={Link}
             to="/AdminPage"
-            className={`hover:underline hover:text-[#97BE5A] !text-white !text-2xl ${location === "/AdminPage" ? "font-bold" : ""
-              }`}
+            onClick={() => setIsOpen(false)} // ← נסגור תפריט
+            className={`hover:underline hover:text-[#97BE5A] !text-white !text-2xl ${location === "/AdminPage" ? "font-bold" : ""}`}
           >
             Admin
           </Navbar.Link>
@@ -88,7 +96,7 @@ const Header = () => {
           <Navbar.Link
             as={Link}
             to="#"
-            onClick={logout}
+            onClick={() => { setIsOpen(false); logout(); }} // ← נסגור תפריט לפני יציאה
             className="text-2xl text-white hover:underline hover:text-red-500"
           >
             התנתק
