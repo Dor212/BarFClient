@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { TRootState } from "../../../Store/BigPie";
 import { useEffect, useState } from "react";
 import { userActions } from "../../../Store/UserSlice";
+import { api } from "../../../api/axios";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,9 +26,9 @@ const Header = () => {
     setIsOpen(false);
   }, [location]);
 
-  const logout = () => {
+  const logout = async () => {
+    await api.post("/users/logout");
     dispatch(userActions.logout());
-    localStorage.removeItem("token");
     nav("/");
   };
 

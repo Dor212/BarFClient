@@ -1,20 +1,22 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { MdDelete, MdDownload } from "react-icons/md";
 import { Tooltip } from "react-tooltip";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { api } from "../../api/axios"; // ← המופע עם baseURL + withCredentials
 
 type FileData = {
     filename: string;
-    path: string;
-    uploadedAt?: string;
+    path: string;        // דוגמה: "/uploads/documents/<client>/<file>"
+    uploadedAt?: string; // ISO string מהשרת
 };
 
 type ClientDocuments = {
     clientName: string;
     files: FileData[];
 };
+
+const API_BASE = import.meta.env.VITE_API_URL || "https://api.barflyshker.com";
 
 const AdminPage = () => {
     const [documents, setDocuments] = useState<ClientDocuments[]>([]);
@@ -24,11 +26,21 @@ const AdminPage = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        axios
-            .get(`${import.meta.env.VITE_API_URL}/users/list`)
-            .then((res) => setDocuments(res.data))
-            .catch((err) => console.error(err))
-            .finally(() => setIsLoading(false));
+        let mounted = true;
+        (async () => {
+            try {
+                const { data } = await api.get<ClientDocuments[]>("/users/list");
+                if (mounted) setDocuments(data);
+            } catch (err) {
+                console.error(err);
+                toast.error("שגיאה בטעינת המסמכים");
+            } finally {
+                if (mounted) setIsLoading(false);
+            }
+        })();
+        return () => {
+            mounted = false;
+        };
     }, []);
 
     const toggleFolder = (clientName: string) => {
@@ -47,9 +59,7 @@ const AdminPage = () => {
 
         setLoadingFolders((prev) => [...prev, clientName]);
         try {
-            await axios.delete(
-                `${import.meta.env.VITE_API_URL}/users/documents/${clientName}`
-            );
+            await api.delete(`/users/documents/${encodeURIComponent(clientName)}`);
             setDocuments((prev) =>
                 prev.filter((client) => client.clientName !== clientName)
             );
@@ -63,7 +73,10 @@ const AdminPage = () => {
     };
 
     const handleDownloadZip = (clientName: string) => {
-        window.open(`${import.meta.env.VITE_API_URL}/users/documents/${clientName}/zip`, "_blank");
+        window.open(
+            `${API_BASE}/users/documents/${encodeURIComponent(clientName)}/zip`,
+            "_blank"
+        );
     };
 
     const filteredDocs = documents.filter((client) =>
@@ -113,12 +126,13 @@ const AdminPage = () => {
                             <div className="flex items-center gap-4">
                                 <span>
                                     {client.clientName.split(new RegExp(`(${search})`, "gi")).map((part, i) =>
-                                        part.toLowerCase() === search.toLowerCase() ? (
+                                        search && part.toLowerCase() === search.toLowerCase() ? (
                                             <mark key={i} className="bg-yellow-200">{part}</mark>
                                         ) : (
-                                            part
+                                            <span key={i}>{part}</span>
                                         )
-                                    )} ({client.files.length})
+                                    )}{" "}
+                                    ({client.files.length})
                                 </span>
 
                                 <button
@@ -130,9 +144,11 @@ const AdminPage = () => {
                                     data-tooltip-content="מחק את כל התיקייה"
                                     className="text-lg text-red-600 hover:text-red-800"
                                 >
-                                    {loadingFolders.includes(client.clientName)
-                                        ? <span className="inline-block w-4 h-4 border-2 border-t-2 border-gray-300 rounded-full loader small border-t-red-600 animate-spin"></span>
-                                        : <MdDelete />}
+                                    {loadingFolders.includes(client.clientName) ? (
+                                        <span className="inline-block w-4 h-4 border-2 border-t-2 border-gray-300 rounded-full loader small border-t-red-600 animate-spin"></span>
+                                    ) : (
+                                        <MdDelete />
+                                    )}
                                 </button>
 
                                 <button
@@ -159,43 +175,54 @@ const AdminPage = () => {
                             className={`grid grid-cols-2 gap-4 mt-4 md:grid-cols-4 overflow-hidden transition-all duration-500 ${openFolders.includes(client.clientName) ? "max-h-[1000px]" : "max-h-0"
                                 }`}
                         >
-                            {client.files.map((file) => (
-                                <div
-                                    key={file.path}
-                                    className="overflow-hidden transition-all duration-300 transform border border-gray-200 shadow-xl rounded-xl bg-gradient-to-br from-white to-gray-50 hover:shadow-2xl hover:scale-105"
-                                >
-                                    <a
-                                        href={`${import.meta.env.VITE_API_URL}${file.path}`}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="block"
+                            {client.files.map((file) => {
+                                const fileUrl = `${API_BASE}${file.path}`;
+                                const isImage = /\.(jpg|jpeg|png|gif)$/i.test(file.filename); // ← תיקון הריג'אקס
+                                const isPdf = /\.(pdf)$/i.test(file.filename);
+                                const isXls = /\.(xls|xlsx)$/i.test(file.filename);
+                                const isDoc = /\.(doc|docx)$/i.test(file.filename);
+
+                                return (
+                                    <div
+                                        key={file.path}
+                                        className="overflow-hidden transition-all duration-300 transform border border-gray-200 shadow-xl rounded-xl bg-gradient-to-br from-white to-gray-50 hover:shadow-2xl hover:scale-105"
                                     >
-                                        {/.(jpg|jpeg|png|gif)$/i.test(file.filename) ? (
-                                            <img
-                                                src={`${import.meta.env.VITE_API_URL}${file.path}`}
-                                                alt={file.filename}
-                                                className="object-cover w-full transition-transform duration-300 h-36 hover:scale-105"
-                                            />
-                                        ) : /\.(pdf)$/i.test(file.filename) ? (
-                                            <div className="flex items-center justify-center w-full text-5xl bg-red-100 h-36">📄</div>
-                                        ) : /\.(xls|xlsx)$/i.test(file.filename) ? (
-                                            <div className="flex items-center justify-center w-full text-5xl bg-green-100 h-36">📊</div>
-                                        ) : /\.(doc|docx)$/i.test(file.filename) ? (
-                                            <div className="flex items-center justify-center w-full text-5xl bg-blue-100 h-36">📝</div>
-                                        ) : (
-                                            <div className="flex items-center justify-center w-full text-5xl bg-gray-100 h-36">📁</div>
-                                        )}
-                                        <div className="p-3 text-sm text-center break-words">
-                                            {file.filename}
-                                            <div className="mt-1 text-xs text-gray-500">
-                                                {file.uploadedAt
-                                                    ? new Date(file.uploadedAt).toLocaleDateString("he-IL")
-                                                    : ""}
+                                        <a href={fileUrl} target="_blank" rel="noopener noreferrer" className="block">
+                                            {isImage ? (
+                                                <img
+                                                    src={fileUrl}
+                                                    alt={file.filename}
+                                                    className="object-cover w-full transition-transform duration-300 h-36 hover:scale-105"
+                                                />
+                                            ) : isPdf ? (
+                                                <div className="flex items-center justify-center w-full text-5xl bg-red-100 h-36">
+                                                    📄
+                                                </div>
+                                            ) : isXls ? (
+                                                <div className="flex items-center justify-center w-full text-5xl bg-green-100 h-36">
+                                                    📊
+                                                </div>
+                                            ) : isDoc ? (
+                                                <div className="flex items-center justify-center w-full text-5xl bg-blue-100 h-36">
+                                                    📝
+                                                </div>
+                                            ) : (
+                                                <div className="flex items-center justify-center w-full text-5xl bg-gray-100 h-36">
+                                                    📁
+                                                </div>
+                                            )}
+                                            <div className="p-3 text-sm text-center break-words">
+                                                {file.filename}
+                                                <div className="mt-1 text-xs text-gray-500">
+                                                    {file.uploadedAt
+                                                        ? new Date(file.uploadedAt).toLocaleDateString("he-IL")
+                                                        : ""}
+                                                </div>
                                             </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            ))}
+                                        </a>
+                                    </div>
+                                );
+                            })}
                         </div>
                     </div>
                 ))
@@ -210,7 +237,7 @@ const AdminPage = () => {
                     backdropFilter: "blur(4px)",
                     borderRadius: "8px",
                     padding: "8px 12px",
-                    fontSize: "14px"
+                    fontSize: "14px",
                 }}
             />
             <Tooltip
@@ -222,7 +249,7 @@ const AdminPage = () => {
                     backdropFilter: "blur(4px)",
                     borderRadius: "8px",
                     padding: "8px 12px",
-                    fontSize: "14px"
+                    fontSize: "14px",
                 }}
             />
         </div>

@@ -1,4 +1,6 @@
-export type TLoggedInProps ={
-    isLoggedIn: boolean,
-    setIsLoggedIn: (isLoggedIn: boolean) => void;
+import React from "react";
+
+export type TLoggedInProps = {
+  isLoggedIn: boolean;
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 };

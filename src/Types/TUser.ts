@@ -10,3 +10,4 @@ export type TUser = {
         "isAdmin": boolean,
         
 };
+export type TUserClient = Omit<TUser, "password">;

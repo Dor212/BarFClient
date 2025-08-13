@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import Swal from "sweetalert2";
 import React from "react";
 import { FaWhatsapp, FaFacebook, FaInstagram, FaUser, FaUsers, FaBuilding, FaUpload, FaCheckCircle } from "react-icons/fa";
@@ -14,6 +13,7 @@ import AboutMe from "../../Imges/AboutMe.png";
 import { GiReceiveMoney } from "react-icons/gi";
 import { UploadedClientDocuments } from "../../Types/TDocuments.ts";
 import { Helmet } from "react-helmet";
+import { api } from "../../api/axios";
 
 
 type PathwayType = 'single' | 'couple' | 'business';
@@ -33,7 +33,7 @@ const HomePage = () => {
         { url: "/image-swiper/4reasons.png", _id: "pic1" },
 
     ];
-        
+
     const inputDetails: Record<PathwayType, { label: string; placeholder: string }> = {
         single: { label: 'שם מלא', placeholder: 'הזינו את שמכם המלא' },
         couple: { label: 'שם משפחה', placeholder: 'הזינו את שם המשפחה' },
@@ -46,7 +46,7 @@ const HomePage = () => {
         email: "",
         phone: "",
         message: "",
-      });
+    });
 
     useEffect(() => {
         setNameInput('');
@@ -62,7 +62,7 @@ const HomePage = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            await axios.post(`${import.meta.env.VITE_API_URL}/users/contact`, {
+            await api.post("/users/contact", {
                 name: formData.name,
                 email: formData.email,
                 message: `${formData.message}\n\nטלפון: ${formData.phone}`
@@ -115,8 +115,8 @@ const HomePage = () => {
                 formDataToSend.append("files", file);
             });
 
-            await axios.post(
-                `${import.meta.env.VITE_API_URL}/users/documents/upload?name=${encodeURIComponent(data.clientName)}`,
+            await api.post(
+                `/users/documents/upload?name=${encodeURIComponent(data.clientName)}`,
                 formDataToSend,
                 { headers: { "Content-Type": "multipart/form-data" } }
             );
@@ -183,14 +183,14 @@ const HomePage = () => {
             <meta property="og:url" content="..." />
             <meta property="og:type" content="website" />
         </Helmet>
-        <div className="w-full min-h-screen pt-20 text-[#3B3024] font-serif"
-            style={{
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "contain",
-                backgroundPosition: "right top",
-                backgroundAttachment: "fixed",
-                backgroundColor: "#FFF8F8",
-            }}>
+            <div className="w-full min-h-screen pt-20 text-[#3B3024] font-serif"
+                style={{
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "contain",
+                    backgroundPosition: "right top",
+                    backgroundAttachment: "fixed",
+                    backgroundColor: "#FFF8F8",
+                }}>
                 {/* Social Media Buttons */}
                 <div className="fixed-social-buttons">
                     <a href="https://wa.me/972525551825" target="_blank" rel="noopener noreferrer" className="bg-green-500 social-icon-button hover:bg-green-600">
@@ -469,7 +469,7 @@ const HomePage = () => {
                     <div className="w-full max-w-xl px-10 py-16 bg-[#D1F96D] rounded-[80px] shadow-md flex flex-col items-center">
                         <h2 className="mb-4 text-2xl font-semibold text-center text-[#3B3024]">צרו קשר</h2>
                         <p className="mb-6 text-center text-[#5A4B36] text-sm">יש לכם שאלות? מלאו את הטופס ונחזור אליכם בהקדם.</p>
-                        <form onSubmit={handleSubmit} className="flex flex-col items-center w-full gap-4">
+                        <form onSubmit={handleSubmit} className="flex flex-col items-center ו-full gap-4">
                             <div className="w-full max-w-sm">
                                 <label className="block mb-1 text-sm text-[#3B3024]">שם מלא</label>
                                 <input name="name" type="text" value={formData.name} onChange={handleChange} placeholder="השם שלך" className="w-full p-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#97BE5A]" />
