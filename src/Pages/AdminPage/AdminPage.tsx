@@ -3,12 +3,12 @@ import { MdDelete, MdDownload } from "react-icons/md";
 import { Tooltip } from "react-tooltip";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { api } from "../../api/axios"; // ← המופע עם baseURL + withCredentials
+import { api } from "../../api/axios";
 
 type FileData = {
     filename: string;
-    path: string;        // דוגמה: "/uploads/documents/<client>/<file>"
-    uploadedAt?: string; // ISO string מהשרת
+    path: string;      
+    uploadedAt?: string; 
 };
 
 type ClientDocuments = {
