@@ -1,6 +1,6 @@
 import { joiResolver } from "@hookform/resolvers/joi";
-import { Button, FloatingLabel } from "flowbite-react";
-import { useForm } from "react-hook-form";
+import {  FloatingLabel } from "flowbite-react";
+import { Controller, useForm } from "react-hook-form";
 import { LoginSchema } from "../../Validations/LoginSchema";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -8,11 +8,12 @@ import Swal from "sweetalert2";
 import { userActions } from "../../Store/UserSlice";
 import { motion } from "framer-motion";
 import { api } from "../../api/axios";
+import type { AxiosInstance } from "axios";
 
 type LoginForm = {
     email: string;
     password: string;
-    rememberMe: boolean; 
+    rememberMe: boolean;
 };
 
 type ApiError = {
@@ -23,31 +24,34 @@ const LoginPage = () => {
     const dispatch = useDispatch();
     const nav = useNavigate();
 
-    const initialData: LoginForm = {
-        email: "",
-        password: "",
-        rememberMe: true, 
-    };
-
     const {
+        control,
         register,
         handleSubmit,
-        formState: { errors,/*  isValid */ },
+        formState: { errors },
     } = useForm<LoginForm>({
-        defaultValues: initialData,
+        defaultValues: { email: "", password: "", rememberMe: true },
         mode: "onChange",
         resolver: joiResolver(LoginSchema),
     });
 
     const onSubmit = async (form: LoginForm) => {
+        console.log("✅ Form submitted:", form);
+        // If api is an AxiosInstance, you can safely cast to AxiosInstance to access defaults.baseURL
+        
+        console.log("✅ API baseURL:", (api as AxiosInstance).defaults.baseURL);
+
         try {
-            await api.post("/users/login", {
+            const resp = await api.post("/users/login", {
                 email: form.email,
                 password: form.password,
                 rememberMe: form.rememberMe,
             });
+            console.log("Login status:", resp.status);
 
             const { data } = await api.get("/users/me");
+            console.log("User /me:", data);
+
             dispatch(userActions.login(data));
 
             Swal.fire({
@@ -60,6 +64,7 @@ const LoginPage = () => {
 
             nav("/#logo");
         } catch (error) {
+            console.error("❌ Login error (client):", error);
             const msg =
                 (error as ApiError).response?.data?.error ||
                 "Your email or password is incorrect";
@@ -74,10 +79,7 @@ const LoginPage = () => {
     };
 
     return (
-        <div
-            className="min-h-screen pt-20 px-4 flex items-center justify-center bg-[#FFFFFF] font-serif text-[#3B3024]"
-            
-        >
+        <div className="min-h-screen pt-20 px-4 flex items-center justify-center bg-[#FFFFFF] font-serif text-[#3B3024]">
             <motion.div
                 initial={{ opacity: 0, y: -50 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -88,29 +90,52 @@ const LoginPage = () => {
                     Login
                 </h1>
 
-                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
-                    <FloatingLabel
-                        label="Email"
-                        type="email"
-                        variant="standard"
-                        className="text-[#4B4B4B]"
-                        autoComplete="username"
-                        {...register("email")}
+                <form
+                    onSubmit={handleSubmit(onSubmit, (errs) => {
+                        console.warn("❗ RHF validation errors:", errs);
+                    })}
+                    className="flex flex-col gap-5"
+                >
+                    {/* Email */}
+                    <Controller
+                        name="email"
+                        control={control}
+                        render={({ field }) => (
+                            <FloatingLabel
+                                label="Email"
+                                type="email"
+                                variant="standard"
+                                className="text-[#4B4B4B]"
+                                autoComplete="username"
+                                id="email"
+                                {...field}
+                            />
+                        )}
                     />
                     {errors.email && (
-                        <p className="text-sm text-red-600">{errors.email.message}</p>
+                        <p className="text-sm text-red-600">{String(errors.email.message)}</p>
                     )}
 
-                    <FloatingLabel
-                        label="Password"
-                        type="password"
-                        variant="standard"
-                        className="text-[#4B4B4B]"
-                        autoComplete="current-password"
-                        {...register("password")}
+                    {/* Password */}
+                    <Controller
+                        name="password"
+                        control={control}
+                        render={({ field }) => (
+                            <FloatingLabel
+                                label="Password"
+                                type="password"
+                                variant="standard"
+                                className="text-[#4B4B4B]"
+                                autoComplete="current-password"
+                                id="password"
+                                {...field}
+                            />
+                        )}
                     />
                     {errors.password && (
-                        <p className="text-sm text-red-600">{errors.password.message}</p>
+                        <p className="text-sm text-red-600">
+                            {String(errors.password.message)}
+                        </p>
                     )}
 
                     {/* Remember me */}
@@ -119,14 +144,14 @@ const LoginPage = () => {
                         <span>השאר אותי מחובר במכשיר הזה</span>
                     </label>
 
-                    <Button
+                    {/* כפתור רגיל (לא של Flowbite) כדי לשלול בעיות קומפוננטה */}
+                    <button
                         type="submit"
-                        as="button"
-                        /* disabled={!isValid} */
                         className="mt-2 bg-[#D1F96D] text-white font-semibold rounded-lg py-2 hover:bg-[#063942] transition duration-300"
+                        onClick={() => console.log("🖱️ submit clicked")}
                     >
                         Login
-                    </Button>
+                    </button>
                 </form>
 
                 <div className="mt-6 text-center text-sm text-[#5A4B36]">
