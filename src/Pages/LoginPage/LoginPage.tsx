@@ -12,7 +12,7 @@ import { api } from "../../api/axios";
 type LoginForm = {
     email: string;
     password: string;
-    rememberMe: boolean; // חדש
+    rememberMe: boolean; 
 };
 
 type ApiError = {
@@ -26,7 +26,7 @@ const LoginPage = () => {
     const initialData: LoginForm = {
         email: "",
         password: "",
-        rememberMe: true, // ברירת מחדל: להשאיר מחובר במכשיר הזה
+        rememberMe: true, 
     };
 
     const {
@@ -41,14 +41,12 @@ const LoginPage = () => {
 
     const onSubmit = async (form: LoginForm) => {
         try {
-            // לוגין — שולחים גם rememberMe (השרת יקבע maxAge לעוגייה בהתאם)
             await api.post("/users/login", {
                 email: form.email,
                 password: form.password,
                 rememberMe: form.rememberMe,
             });
 
-            // משיכת המשתמש המחובר (מבוסס עוגייה HttpOnly)
             const { data } = await api.get("/users/me");
             dispatch(userActions.login(data));
 
@@ -78,13 +76,7 @@ const LoginPage = () => {
     return (
         <div
             className="min-h-screen pt-20 px-4 flex items-center justify-center bg-[#FFFFFF] font-serif text-[#3B3024]"
-            style={{
-                backgroundImage: "url('/backgrounds/BG4.png')",
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "contain",
-                backgroundPosition: "right top",
-                backgroundAttachment: "fixed",
-            }}
+            
         >
             <motion.div
                 initial={{ opacity: 0, y: -50 }}
