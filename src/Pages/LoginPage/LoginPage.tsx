@@ -121,7 +121,7 @@ const LoginPage = () => {
 
                     <Button
                         type="submit"
-                        disabled={!isValid}
+                        /* disabled={!isValid} */
                         className="mt-2 bg-[#D1F96D] text-white font-semibold rounded-lg py-2 hover:bg-[#063942] transition duration-300"
                     >
                         Login
