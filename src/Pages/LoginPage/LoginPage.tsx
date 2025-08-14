@@ -32,7 +32,7 @@ const LoginPage = () => {
     const {
         register,
         handleSubmit,
-        formState: { errors, isValid },
+        formState: { errors,/*  isValid */ },
     } = useForm<LoginForm>({
         defaultValues: initialData,
         mode: "onChange",
