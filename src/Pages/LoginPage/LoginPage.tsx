@@ -12,7 +12,7 @@ import { api } from "../../api/axios";
 type LoginForm = {
     email: string;
     password: string;
-    rememberMe: boolean; 
+    rememberMe: boolean;
 };
 
 type ApiError = {
@@ -26,13 +26,13 @@ const LoginPage = () => {
     const initialData: LoginForm = {
         email: "",
         password: "",
-        rememberMe: true, 
+        rememberMe: true,
     };
 
     const {
         register,
         handleSubmit,
-        formState: { errors,/*  isValid */ },
+        formState: { errors /* isValid */ },
     } = useForm<LoginForm>({
         defaultValues: initialData,
         mode: "onChange",
@@ -40,14 +40,21 @@ const LoginPage = () => {
     });
 
     const onSubmit = async (form: LoginForm) => {
+        console.log("Form submitted:", form);
+        // If api is an AxiosInstance, you can safely access baseURL like this:
+        console.log("API baseURL:", api.defaults.baseURL);
+
         try {
-            await api.post("/users/login", {
+            const resp = await api.post("/users/login", {
                 email: form.email,
                 password: form.password,
                 rememberMe: form.rememberMe,
             });
+            console.log("Login resp status:", resp.status);
 
             const { data } = await api.get("/users/me");
+            console.log("User data from /me:", data);
+
             dispatch(userActions.login(data));
 
             Swal.fire({
@@ -60,6 +67,7 @@ const LoginPage = () => {
 
             nav("/#logo");
         } catch (error) {
+            console.error("Login error (client):", error);
             const msg =
                 (error as ApiError).response?.data?.error ||
                 "Your email or password is incorrect";
@@ -76,7 +84,6 @@ const LoginPage = () => {
     return (
         <div
             className="min-h-screen pt-20 px-4 flex items-center justify-center bg-[#FFFFFF] font-serif text-[#3B3024]"
-            
         >
             <motion.div
                 initial={{ opacity: 0, y: -50 }}
