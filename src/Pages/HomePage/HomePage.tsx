@@ -172,17 +172,77 @@ const HomePage = () => {
 
     return (
         <><Helmet>
-            <title>בר פליישקר - יועץ פיננסי מוסמך</title>
-            <meta name="description" content="שירותי ייעוץ פיננסי מקצועיים בהתאמה אישית לרווקים, זוגות ובעלי עסקים. בואו להשיג שליטה כלכלית אמיתית." />
-            <meta name="keywords" content="ייעוץ פיננסי, כלכלה משפחתית, ניהול תקציב, בר פליישקר, הלוואות, תכנון פיננסי" />
-            <meta name="robots" content="index, follow" />
-            <link rel="canonical" href="" />
-            <meta property="og:title" content="בר פליישקר - יועץ פיננסי מוסמך" />
-            <meta property="og:description" content="ליווי כלכלי ממוקד תוצאות, עם גישה אישית וברורה. הצעד הראשון שלך לחופש כלכלי מתחיל כאן." />
-            <meta property="og:image" content="/backgrounds/BarFLogo.png" />
-            <meta property="og:url" content="..." />
+            
+            <title>בר פליישקר – יועץ פיננסי מוסמך | BAR FLYSHKER</title>
+            <meta
+                name="description"
+                content="שירותי ייעוץ פיננסי מותאמים אישית לרווקים, זוגות ובעלי עסקים: ניהול תקציב, ליווי כלכלי, תכנון פיננסי והגשת מסמכים בצורה קלה ומהירה."
+            />
+            
+            <meta
+                name="keywords"
+                content="ייעוץ פיננסי, כלכלה משפחתית, ניהול תקציב, בר פליישקר, תכנון פיננסי, ליווי כלכלי, מסמכים"
+            />
+            <meta name="robots" content="index,follow" />
+
+            
+            <link rel="canonical" href="https://barflyshker.com/" />
+
+            
             <meta property="og:type" content="website" />
+            <meta property="og:site_name" content="BAR FLYSHKER" />
+            <meta property="og:title" content="בר פליישקר – יועץ פיננסי מוסמך" />
+            <meta
+                property="og:description"
+                content="ליווי ותכנון פיננסי ממוקד תוצאות, עם תהליך ברור ופשוט שמתאים לרווקים, זוגות ובעלי עסקים."
+            />
+            
+            <meta property="og:image" content="https://barflyshker.com/backgrounds/BarFLogo.png" />
+            <meta property="og:url" content="https://barflyshker.com/" />
+
+           
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:title" content="בר פליישקר – יועץ פיננסי מוסמך" />
+            <meta
+                name="twitter:description"
+                content="שירותי ייעוץ פיננסי מותאמים אישית – ניהול תקציב, ליווי כלכלי ותכנון פיננסי. קבעו שיחה ללא התחייבות."
+            />
+            <meta name="twitter:image" content="https://barflyshker.com/backgrounds/BarFLogo.png" />
+
+            
+            <script type="application/ld+json">
+                {JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "Organization",
+                    "name": "BAR FLYSHKER",
+                    "url": "https://barflyshker.com/",
+                    "logo": "https://barflyshker.com/backgrounds/BarFLogo.png",
+                    "sameAs": [
+                        "https://www.facebook.com/bar.flyshker?locale=he_IL",
+                        "https://www.instagram.com/barflyshker/"
+                    ]
+                })}
+            </script>
+
+        
+            <script type="application/ld+json">
+                {JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "WebSite",
+                    "name": "BAR FLYSHKER",
+                    "url": "https://barflyshker.com/",
+                    "potentialAction": {
+                        "@type": "SearchAction",
+                        "target": "https://barflyshker.com/?q={search_term_string}",
+                        "query-input": "required name=search_term_string"
+                    }
+                })}
+            </script>
         </Helmet>
+
+        
+            <h1 className="sr-only">בר פליישקר – יועץ פיננסי מוסמך</h1>
+
             <div className="w-full min-h-screen pt-20 text-[#3B3024] font-serif"
                 style={{
                     backgroundRepeat: "no-repeat",

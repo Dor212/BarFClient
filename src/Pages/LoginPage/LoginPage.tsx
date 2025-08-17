@@ -37,7 +37,7 @@ const LoginPage = () => {
 
     const onSubmit = async (form: LoginForm) => {
         console.log("✅ Form submitted:", form);
-        // If api is an AxiosInstance, you can safely cast to AxiosInstance to access defaults.baseURL
+
         
         console.log("✅ API baseURL:", (api as AxiosInstance).defaults.baseURL);
 
@@ -96,7 +96,7 @@ const LoginPage = () => {
                     })}
                     className="flex flex-col gap-5"
                 >
-                    {/* Email */}
+                    
                     <Controller
                         name="email"
                         control={control}
@@ -116,7 +116,7 @@ const LoginPage = () => {
                         <p className="text-sm text-red-600">{String(errors.email.message)}</p>
                     )}
 
-                    {/* Password */}
+                    
                     <Controller
                         name="password"
                         control={control}
@@ -138,13 +138,13 @@ const LoginPage = () => {
                         </p>
                     )}
 
-                    {/* Remember me */}
+                 
                     <label className="flex items-center gap-2 mt-1 text-sm">
                         <input type="checkbox" {...register("rememberMe")} defaultChecked />
                         <span>השאר אותי מחובר במכשיר הזה</span>
                     </label>
 
-                    {/* כפתור רגיל (לא של Flowbite) כדי לשלול בעיות קומפוננטה */}
+                    
                     <button
                         type="submit"
                         className="mt-2 bg-[#D1F96D] text-white font-semibold rounded-lg py-2 hover:bg-[#063942] transition duration-300"
