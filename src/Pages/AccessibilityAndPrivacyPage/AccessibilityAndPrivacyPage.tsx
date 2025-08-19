@@ -10,9 +10,9 @@ const AccessibilityAndPrivacyPage: React.FC = () => {
         consent: false,
     });
 
-    const email = "support@yourdomain.com"; // עדכן למייל שלך
-    const phone = "050-0000000";            // עדכן לטלפון שלך
-    const lastUpdated = "אוגוסט 2025";      // עדכן לפי הצורך
+    const email = "barflyshker@gmail.com"; 
+    const phone = "052-5551825";            
+    const lastUpdated = "אוגוסט 2025";     
 
     function onChange(
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -244,12 +244,7 @@ const AccessibilityAndPrivacyPage: React.FC = () => {
                         >
                             שליחת בקשה
                         </button>
-                        <a
-                            href={`tel:${phone.replace(/[^0-9+]/g, "")}`}
-                            className="px-5 py-3 transition bg-white border border-gray-300 shadow-sm rounded-xl hover:bg-white/90"
-                        >
-                            תמיכה טלפונית: {phone}
-                        </a>
+                        
                     </div>
                 </form>
             </section>
