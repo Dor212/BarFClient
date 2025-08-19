@@ -6,6 +6,7 @@ import Footer from "./components/Layout/Footer/Footer";
 import LoginPage from "./Pages/LoginPage/LoginPage";
 import AdminPage from "./Pages/AdminPage/AdminPage"
 import AuthLoader from "./components/Layout/AuthLoader.tsx";
+import AccessibilityAndPrivacyPage from "./Pages/AccessibilityAndPrivacyPage/AccessibilityAndPrivacyPage.tsx";
 
 
 
@@ -20,6 +21,7 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/AdminPage" element={<AdminPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/accessibility" element={<AccessibilityAndPrivacyPage />} />
       </Routes>
       <Footer />
     </div>
