@@ -2,8 +2,8 @@ import React from "react";
 
 const TermsPage: React.FC = () => {
     const brandName = "בר פליישקר";
-    const email = "support@barflyshker.com"; // עדכן אם צריך
-    const phone = "050-0000000";             // עדכן אם צריך
+    const email = "barflyshker@gmail.com";
+    const phone = "052-5551825";
     const lastUpdated = "אוגוסט 2025";
 
     return (
