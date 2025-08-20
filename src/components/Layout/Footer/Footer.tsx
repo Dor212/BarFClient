@@ -19,6 +19,9 @@ const Footer = () => {
                     >
                         הצהרת נגישות ומדיניות פרטיות
                     </FbFooter.Link>
+                    <FbFooter.Link href="/terms" className="text-slate-200 hover:underline">
+                        תנאי שימוש
+                    </FbFooter.Link>
                 </FbFooter.LinkGroup>
             </div>
         </FbFooter>

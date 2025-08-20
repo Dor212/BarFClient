@@ -507,6 +507,15 @@ const HomePage = () => {
                         ))}
                     </div>
                     <div className="mt-10 text-center">
+                        <label className="inline-flex items-start gap-2 text-sm">
+                            <input
+                                type="checkbox"
+                                required
+                                className="mt-1 h-4 w-4 rounded border-[#063942]/40"
+                            />
+                            אני מאשר/ת את <a href="/terms" className="underline">תנאי השימוש</a> ואת{" "}
+                            <a href="/accessibility" className="underline">מדיניות הפרטיות</a>.
+                        </label>
                         <button
                             onClick={handleSubmitDocument}
                             className="px-10 py-4 text-lg font-semibold text-white transition-colors duration-300 bg-[#97BE5A] rounded-full hover:bg-[#7aa74d] focus:outline-none focus:ring-4 focus:ring-[#D1F96D]"
@@ -546,6 +555,15 @@ const HomePage = () => {
                                 <label className="block mb-1 text-sm text-[#3B3024]">הודעה</label>
                                 <textarea name="message" value={formData.message} onChange={handleChange} placeholder="ההודעה שלך" rows={3} className="w-full p-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#97BE5A]"></textarea>
                             </div>
+                            <label className="inline-flex items-start gap-2 text-sm">
+                                <input
+                                    type="checkbox"
+                                    required
+                                    className="mt-1 h-4 w-4 rounded border-[#063942]/40"
+                                />
+                                אני מאשר/ת את <a href="/terms" className="underline">תנאי השימוש</a> ואת{" "}
+                                <a href="/accessibility" className="underline">מדיניות הפרטיות</a>.
+                            </label>   
                             <button type="submit" className="w-full max-w-sm px-4 py-3 mt-2 text-sm font-semibold text-[#97BE5A] bg-[#FAF4E7] rounded-md shadow-md hover:bg-[#97BE5A] hover:text-[#FAF4E7]">
                                 שלח הודעה
                             </button>
