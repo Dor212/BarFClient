@@ -38,7 +38,6 @@ const faqs: FAQ[] = [
     },
 ];
 
-
 export default function FAQSection() {
     const [open, setOpen] = useState<number | null>(0);
 
@@ -53,29 +52,41 @@ export default function FAQSection() {
             dir="rtl"
             aria-labelledby="faq-title"
         >
-            <div className="w-full max-w-3xl px-6 py-12 bg-[#F1F3C2] rounded-[32px] shadow-md">
-                <h2 id="faq-title" className="mb-2 text-2xl md:text-3xl font-bold text-center text-[#3B3024]">
-                    שאלות נפוצות
-                </h2>
-                <p className="mb-6 text-center text-[#5A4B36] text-sm">
-                    כל מה שרציתם לדעת על התהליך – בצורה ברורה וקצרה.
-                </p>
+            <div className="relative w-full max-w-3xl p-6 transition-shadow duration-300 bg-white border border-gray-200 shadow-lg rounded-2xl hover:shadow-xl">
+                {/* אייקון עגול למעלה כמו במאמר */}
+                <div className="absolute top-[-30px] left-1/2 transform -translate-x-1/2 bg-[#D1F96D] w-16 h-16 flex items-center justify-center rounded-full shadow-md border-4 border-white">
+                    <span className="text-[#063942] text-2xl font-bold">?</span>
+                </div>
 
-                <div className="divide-y divide-[#e2d9c3] rounded-xl overflow-hidden bg-white border border-[#e2d9c3]">
+                <div className="mt-8 text-center">
+                    <h2
+                        id="faq-title"
+                        className="mb-2 text-2xl font-bold md:text-3xl"
+                        style={{ color: "#063942" }}
+                    >
+                        שאלות נפוצות
+                    </h2>
+                    <p className="mb-6 text-sm leading-relaxed text-gray-600">
+                        כל מה שרציתם לדעת על התהליך – בצורה ברורה וקצרה.
+                    </p>
+                </div>
+
+                {/* אקורדיון */}
+                <div className="overflow-hidden border border-gray-200 divide-y divide-gray-200 rounded-xl">
                     {faqs.map((item, i) => {
                         const isOpen = open === i;
                         return (
                             <div key={item.q} className="group">
                                 <button
                                     type="button"
-                                    className="w-full text-right px-4 py-4 flex items-center justify-between gap-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#97BE5A]"
+                                    className="w-full text-right px-4 py-4 flex items-center justify-between gap-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#D1F96D]"
                                     aria-expanded={isOpen}
                                     aria-controls={`faq-panel-${i}`}
                                     onClick={() => setOpen(isOpen ? null : i)}
                                 >
-                                    <span className="font-semibold text-[#3B3024]">{item.q}</span>
+                                    <span className="font-semibold text-[#063942]">{item.q}</span>
                                     <span
-                                        className="shrink-0 w-8 h-8 rounded-full bg-[#CBB279] text-[#3B3024] flex items-center justify-center transition group-hover:scale-105"
+                                        className="shrink-0 w-8 h-8 rounded-full bg-[#D1F96D] text-[#063942] flex items-center justify-center transition group-hover:scale-105"
                                         aria-hidden
                                     >
                                         {isOpen ? "−" : "+"}
@@ -96,17 +107,23 @@ export default function FAQSection() {
                     })}
                 </div>
 
-                {/* CTA עדין בסוף ה-FAQ (אופציונלי) */}
+                {/* CTA */}
                 <div className="flex flex-col items-center justify-center gap-3 mt-8 sm:flex-row">
                     <a
                         href="https://wa.me/9725XXXXXXXX?text=שלום, אשמח לשיחת היכרות"
-                        className="px-5 py-3 rounded-xl bg-[#97BE5A] text-white hover:bg-[#7ea649] transition shadow w-full sm:w-auto text-center"
+                        className="w-full px-5 py-3 text-center text-white transition shadow rounded-xl sm:w-auto"
+                        style={{ backgroundColor: "#063942" }}
                     >
                         קבעו שיחת היכרות בוואטסאפ
                     </a>
                     <a
                         href="#contact"
-                        className="px-5 py-3 rounded-xl bg-[#CBB279] text-[#3B3024] hover:bg-[#b39a5f] transition shadow w-full sm:w-auto text-center"
+                        className="w-full px-5 py-3 text-center transition rounded-xl sm:w-auto"
+                        style={{
+                            color: "#063942",
+                            backgroundColor: "#FFFFFF",
+                            border: "1px solid #063942",
+                        }}
                     >
                         רוצים לשאול משהו נוסף?
                     </a>
