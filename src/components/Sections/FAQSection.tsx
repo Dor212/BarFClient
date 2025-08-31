@@ -67,7 +67,7 @@ export default function FAQSection() {
                         שאלות נפוצות
                     </h2>
                     <p className="mb-6 text-sm leading-relaxed text-gray-600">
-                        כל מה שרציתם לדעת על התהליך – בצורה ברורה וקצרה.
+                        כל מה שרציתם לדעת על התהליך <br></br> בצורה ברורה וקצרה.
                     </p>
                 </div>
 
