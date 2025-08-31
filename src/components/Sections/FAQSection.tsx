@@ -48,12 +48,12 @@ export default function FAQSection() {
             whileInView={{ opacity: 1 }}
             transition={{ duration: 1 }}
             viewport={{ once: true }}
-            className="container flex justify-center px-6 py-20 mx-auto hebrew-content"
+            className="container flex justify-center px-6 py-20 mx-auto hebrew-content heebo-p1"
             dir="rtl"
             aria-labelledby="faq-title"
         >
             <div className="relative w-full max-w-3xl p-6 transition-shadow duration-300 bg-white border border-gray-200 shadow-lg rounded-2xl hover:shadow-xl">
-                {/* אייקון עגול למעלה כמו במאמר */}
+                {/* אייקון עגול למעלה */}
                 <div className="absolute top-[-30px] left-1/2 transform -translate-x-1/2 bg-[#D1F96D] w-16 h-16 flex items-center justify-center rounded-full shadow-md border-4 border-white">
                     <span className="text-[#063942] text-2xl font-bold">?</span>
                 </div>
@@ -112,7 +112,7 @@ export default function FAQSection() {
                     <a
                         href="https://wa.me/9725XXXXXXXX?text=שלום, אשמח לשיחת היכרות"
                         className="w-full px-5 py-3 text-center text-white transition shadow rounded-xl sm:w-auto"
-                        style={{ backgroundColor: "#063942" }}
+                        style={{ backgroundColor: "#063942", fontFamily: "Heebo, sans-serif" }}
                     >
                         קבעו שיחת היכרות בוואטסאפ
                     </a>
@@ -123,6 +123,7 @@ export default function FAQSection() {
                             color: "#063942",
                             backgroundColor: "#FFFFFF",
                             border: "1px solid #063942",
+                            fontFamily: "Heebo, sans-serif",
                         }}
                     >
                         רוצים לשאול משהו נוסף?
