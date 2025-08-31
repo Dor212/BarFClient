@@ -106,29 +106,6 @@ export default function FAQSection() {
                         );
                     })}
                 </div>
-
-                {/* CTA */}
-                <div className="flex flex-col items-center justify-center gap-3 mt-8 sm:flex-row">
-                    <a
-                        href="https://wa.me/9725XXXXXXXX?text=שלום, אשמח לשיחת היכרות"
-                        className="w-full px-5 py-3 text-center text-white transition shadow rounded-xl sm:w-auto"
-                        style={{ backgroundColor: "#063942", fontFamily: "Heebo, sans-serif" }}
-                    >
-                        קבעו שיחת היכרות בוואטסאפ
-                    </a>
-                    <a
-                        href="#contact"
-                        className="w-full px-5 py-3 text-center transition rounded-xl sm:w-auto"
-                        style={{
-                            color: "#063942",
-                            backgroundColor: "#FFFFFF",
-                            border: "1px solid #063942",
-                            fontFamily: "Heebo, sans-serif",
-                        }}
-                    >
-                        רוצים לשאול משהו נוסף?
-                    </a>
-                </div>
             </div>
         </motion.section>
     );
