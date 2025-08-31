@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
 const AccessibilityAndPrivacyPage: React.FC = () => {
-    // צבעים לפי הבקשה: טקסט #063942 על רקע #FFF8F8
+   
     const [form, setForm] = useState({
         fullName: "",
         userEmail: "",
-        requestType: "access", // access | delete | correct | portability | object
+        requestType: "access", 
         message: "",
         consent: false,
     });
@@ -42,12 +42,10 @@ const AccessibilityAndPrivacyPage: React.FC = () => {
             className="container max-w-6xl px-4 py-8 mx-auto mt-20"
             style={{ backgroundColor: "#FFF8F8", color: "#063942" }}
         >
-            {/* כותרת */}
             <h1 className="mb-10 text-5xl font-bold text-center">
                 הצהרת נגישות ומדיניות פרטיות
             </h1>
 
-            {/* פס מידע עליון (בסגנון ה-AdminPage) */}
             <div className="flex flex-col items-center justify-around gap-2 p-4 mb-8 border border-gray-200 shadow-lg rounded-xl bg-gradient-to-r from-gray-50 to-white sm:flex-row">
                 <div className="text-center">
                     <strong>תאריך עדכון:</strong> {lastUpdated}
@@ -61,8 +59,6 @@ const AccessibilityAndPrivacyPage: React.FC = () => {
                     <a className="underline" href={`tel:${phone.replace(/[^0-9+]/g, "")}`}>{phone}</a>
                 </div>
             </div>
-
-            {/* הצהרת נגישות */}
             <section className="p-6 mb-6 transition border shadow-lg rounded-xl bg-gradient-to-br from-white to-gray-50 hover:shadow-2xl">
                 <h2 className="text-2xl font-semibold">הצהרת נגישות</h2>
                 <p className="mt-3 leading-7">

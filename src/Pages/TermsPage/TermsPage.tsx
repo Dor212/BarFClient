@@ -12,12 +12,11 @@ const TermsPage: React.FC = () => {
             className="container max-w-6xl px-4 py-8 mx-auto mt-20"
             style={{ backgroundColor: "#FFF8F8", color: "#063942" }}
         >
-            {/* כותרת */}
+          
             <h1 className="mb-10 text-5xl font-bold text-center">
                 תנאי שימוש באתר {brandName}
             </h1>
 
-            {/* פס מידע עליון */}
             <div className="flex flex-col items-center justify-around gap-2 p-4 mb-8 border border-gray-200 shadow-lg rounded-xl bg-gradient-to-r from-gray-50 to-white sm:flex-row">
                 <div className="text-center">
                     <strong>תאריך עדכון:</strong> {lastUpdated}
@@ -32,7 +31,7 @@ const TermsPage: React.FC = () => {
                 </div>
             </div>
 
-            {/* הקדמה וקבלה */}
+        
             <section className="p-6 mb-6 transition border shadow-lg rounded-xl bg-gradient-to-br from-white to-gray-50 hover:shadow-2xl">
                 <h2 className="text-2xl font-semibold">1. כללי וקבלת התנאים</h2>
                 <p className="mt-3 leading-7">
@@ -42,7 +41,6 @@ const TermsPage: React.FC = () => {
                 </p>
             </section>
 
-            {/* הגדרות ושינויים */}
             <section className="p-6 mb-6 transition border shadow-lg rounded-xl bg-gradient-to-br from-white to-gray-50 hover:shadow-2xl">
                 <h2 className="text-2xl font-semibold">2. הגדרות, עדכונים ושינויים</h2>
                 <p className="mt-3 leading-7">
@@ -51,7 +49,7 @@ const TermsPage: React.FC = () => {
                 </p>
             </section>
 
-            {/* כשירות וגיל */}
+         
             <section className="p-6 mb-6 transition border shadow-lg rounded-xl bg-gradient-to-br from-white to-gray-50 hover:shadow-2xl">
                 <h2 className="text-2xl font-semibold">3. כשירות לשימוש וגיל מינימלי</h2>
                 <p className="mt-3 leading-7">
@@ -60,7 +58,7 @@ const TermsPage: React.FC = () => {
                 </p>
             </section>
 
-            {/* שימוש מותר באתר */}
+          
             <section className="p-6 mb-6 transition border shadow-lg rounded-xl bg-gradient-to-br from-white to-gray-50 hover:shadow-2xl">
                 <h2 className="text-2xl font-semibold">4. שימוש מותר באתר</h2>
                 <ul className="pr-5 mt-3 space-y-2 leading-7 list-disc">
@@ -70,7 +68,7 @@ const TermsPage: React.FC = () => {
                 </ul>
             </section>
 
-            {/* קניין רוחני */}
+           
             <section className="p-6 mb-6 transition border shadow-lg rounded-xl bg-gradient-to-br from-white to-gray-50 hover:shadow-2xl">
                 <h2 className="text-2xl font-semibold">5. זכויות קניין רוחני</h2>
                 <p className="mt-3 leading-7">
@@ -80,7 +78,6 @@ const TermsPage: React.FC = () => {
                 </p>
             </section>
 
-            {/* תוכן משתמשים */}
             <section className="p-6 mb-6 transition border shadow-lg rounded-xl bg-gradient-to-br from-white to-gray-50 hover:shadow-2xl">
                 <h2 className="text-2xl font-semibold">6. תכני משתמשים והעלאות</h2>
                 <p className="mt-3 leading-7">
@@ -90,7 +87,6 @@ const TermsPage: React.FC = () => {
                 </p>
             </section>
 
-            {/* עסקאות ותשלומים (אם רלוונטי) */}
             <section className="p-6 mb-6 transition border shadow-lg rounded-xl bg-gradient-to-br from-white to-gray-50 hover:shadow-2xl">
                 <h2 className="text-2xl font-semibold">7. עסקאות, תשלומים וביטולים</h2>
                 <p className="mt-3 leading-7">
@@ -100,7 +96,7 @@ const TermsPage: React.FC = () => {
                 </p>
             </section>
 
-            {/* פרטיות וקוקיות */}
+         
             <section className="p-6 mb-6 transition border shadow-lg rounded-xl bg-gradient-to-br from-white to-gray-50 hover:shadow-2xl">
                 <h2 className="text-2xl font-semibold">8. פרטיות ועוגיות (Cookies)</h2>
                 <p className="mt-3 leading-7">
@@ -111,7 +107,6 @@ const TermsPage: React.FC = () => {
                 </p>
             </section>
 
-            {/* נגישות */}
             <section className="p-6 mb-6 transition border shadow-lg rounded-xl bg-gradient-to-br from-white to-gray-50 hover:shadow-2xl">
                 <h2 className="text-2xl font-semibold">9. נגישות</h2>
                 <p className="mt-3 leading-7">
@@ -120,7 +115,7 @@ const TermsPage: React.FC = () => {
                 </p>
             </section>
 
-            {/* קישורים חיצוניים */}
+           
             <section className="p-6 mb-6 transition border shadow-lg rounded-xl bg-gradient-to-br from-white to-gray-50 hover:shadow-2xl">
                 <h2 className="text-2xl font-semibold">10. קישורים לאתרים חיצוניים</h2>
                 <p className="mt-3 leading-7">
@@ -129,7 +124,7 @@ const TermsPage: React.FC = () => {
                 </p>
             </section>
 
-            {/* כתב ויתור ואחריות */}
+        
             <section className="p-6 mb-6 transition border shadow-lg rounded-xl bg-gradient-to-br from-white to-gray-50 hover:shadow-2xl">
                 <h2 className="text-2xl font-semibold">11. כתב ויתור והגבלת אחריות</h2>
                 <p className="mt-3 leading-7">
@@ -139,7 +134,7 @@ const TermsPage: React.FC = () => {
                 </p>
             </section>
 
-            {/* שיפוי */}
+          
             <section className="p-6 mb-6 transition border shadow-lg rounded-xl bg-gradient-to-br from-white to-gray-50 hover:shadow-2xl">
                 <h2 className="text-2xl font-semibold">12. שיפוי</h2>
                 <p className="mt-3 leading-7">

@@ -8,12 +8,12 @@ import { Navigation, EffectCoverflow } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/effect-coverflow";
-import { TContactFormData } from "../../Types/TContactFromData.ts";
 import AboutMe from "../../Imges/AboutMe.png";
 import { GiReceiveMoney } from "react-icons/gi";
 import { UploadedClientDocuments } from "../../Types/TDocuments.ts";
 import { Helmet } from "react-helmet";
 import { api } from "../../api/axios";
+import FAQSection from "../../components/Sections/FAQSection.tsx";
 
 
 type PathwayType = 'single' | 'couple' | 'business';
@@ -41,13 +41,6 @@ const HomePage = () => {
     };
 
 
-    const [formData, setFormData] = useState<TContactFormData>({
-        name: "",
-        email: "",
-        phone: "",
-        message: "",
-    });
-
     useEffect(() => {
         setNameInput('');
     }, [selectedPathway]);
@@ -55,35 +48,7 @@ const HomePage = () => {
     const currentInput = selectedPathway ? inputDetails[selectedPathway] : null;
 
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        try {
-            await api.post("/users/contact", {
-                name: formData.name,
-                email: formData.email,
-                message: `${formData.message}\n\nטלפון: ${formData.phone}`
-            });
-            Swal.fire({
-                icon: "success",
-                title: "נשלח בהצלחה",
-                text: "נחזור אליך בהקדם!",
-                timer: 1500,
-            });
-            setFormData({ name: "", email: "", phone: "", message: "" });
-        } catch (err) {
-            console.error(err);
-            Swal.fire({
-                icon: "error",
-                title: "שגיאה",
-                text: "משהו השתבש, נסה שוב.",
-                timer: 1500,
-            });
-        }
-    };
 
     const handleFileUpload = (documentName: string, event: React.ChangeEvent<HTMLInputElement>) => {
         const files = Array.from(event.target.files || []);
@@ -525,51 +490,8 @@ const HomePage = () => {
                     </div>
                 </motion.section>
 
-                {/*Contact us section*/}
-                <motion.section
-                    id="contact"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ duration: 1 }}
-                    viewport={{ once: true }}
-                    className="container flex justify-center px-6 py-20 mx-auto heebo-p1"
-                    dir="rtl"
-                >
-                    <div className="w-full max-w-xl px-10 py-16 bg-[#D1F96D] rounded-[80px] shadow-md flex flex-col items-center">
-                        <h2 className="mb-4 text-2xl font-semibold text-center text-[#3B3024]">צרו קשר</h2>
-                        <p className="mb-6 text-center text-[#5A4B36] text-sm">יש לכם שאלות? מלאו את הטופס ונחזור אליכם בהקדם.</p>
-                        <form onSubmit={handleSubmit} className="flex flex-col items-center ו-full gap-4">
-                            <div className="w-full max-w-sm">
-                                <label className="block mb-1 text-sm text-[#3B3024]">שם מלא</label>
-                                <input name="name" type="text" value={formData.name} onChange={handleChange} placeholder="השם שלך" className="w-full p-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#97BE5A]" />
-                            </div>
-                            <div className="w-full max-w-sm">
-                                <label className="block mb-1 text-sm text-[#3B3024]">כתובת אימייל</label>
-                                <input name="email" type="email" value={formData.email} onChange={handleChange} placeholder="האימייל שלך" className="w-full p-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#97BE5A]" />
-                            </div>
-                            <div className="w-full max-w-sm">
-                                <label className="block mb-1 text-sm text-[#3B3024]">מספר פלאפון</label>
-                                <input name="phone" type="tel" value={formData.phone} onChange={handleChange} placeholder="המספר שלך" className="w-full p-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#97BE5A]" />
-                            </div>
-                            <div className="w-full max-w-sm">
-                                <label className="block mb-1 text-sm text-[#3B3024]">הודעה</label>
-                                <textarea name="message" value={formData.message} onChange={handleChange} placeholder="ההודעה שלך" rows={3} className="w-full p-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#97BE5A]"></textarea>
-                            </div>
-                            <label className="inline-flex items-start gap-2 text-sm">
-                                <input
-                                    type="checkbox"
-                                    required
-                                    className="mt-1 h-4 w-4 rounded border-[#063942]/40"
-                                />
-                                אני מאשר/ת את <a href="/terms" className="underline">תנאי השימוש</a> ואת{" "}
-                                <a href="/accessibility" className="underline">מדיניות הפרטיות</a>.
-                            </label>   
-                            <button type="submit" className="w-full max-w-sm px-4 py-3 mt-2 text-sm font-semibold text-[#97BE5A] bg-[#FAF4E7] rounded-md shadow-md hover:bg-[#97BE5A] hover:text-[#FAF4E7]">
-                                שלח הודעה
-                            </button>
-                        </form>
-                    </div>
-                </motion.section>
+                {/*FAQ section*/}
+                <FAQSection />
 
             </div></>
     );
