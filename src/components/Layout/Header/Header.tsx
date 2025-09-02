@@ -38,8 +38,7 @@ const Header = () => {
       rounded
       className="fixed top-0 left-0 z-50 w-full bg-[#063942]/90 backdrop-blur-md shadow-md"
     >
-      {/* צד ימין – התחבר / התנתק / אדמין */}
-      <div className="flex items-center order-1 gap-6 md:order-none">
+      <div className="items-center order-1 hidden gap-6 md:flex md:order-none">
         {!user && (
           <Navbar.Link
             as={Link}
@@ -74,7 +73,6 @@ const Header = () => {
         )}
       </div>
 
-      {/* צד שמאל – לוגו */}
       <Navbar.Brand
         as="button"
         onClick={() => {
@@ -91,14 +89,10 @@ const Header = () => {
         />
       </Navbar.Brand>
 
-      {/* תפריט מובייל */}
       <Navbar.Toggle onClick={toggleNavbar} />
-      <Navbar.Collapse
-        className={`${isOpen ? "block" : "hidden"} md:hidden text-lg`}
-      >
+      <Navbar.Collapse className={`${isOpen ? "block" : "hidden"} md:hidden text-lg`}>
         {!user && (
           <>
-            {/* הרשמה תישאר רק במובייל */}
             <Navbar.Link
               as={Link}
               to="/register"
@@ -106,14 +100,6 @@ const Header = () => {
               className={`hover:underline hover:text-[#97BE5A] !text-white !text-xl ${location === "/register" ? "font-bold" : ""}`}
             >
               הרשמה
-            </Navbar.Link>
-            <Navbar.Link
-              as={Link}
-              to="/login"
-              onClick={() => setIsOpen(false)}
-              className={`hover:underline hover:text-[#97BE5A] !text-white !text-xl ${location === "/login" ? "font-bold" : ""}`}
-            >
-              התחבר
             </Navbar.Link>
           </>
         )}
