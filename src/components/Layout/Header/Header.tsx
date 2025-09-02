@@ -13,14 +13,12 @@ const Header = () => {
   const dispatch = useDispatch();
   const nav = useNavigate();
 
-
   useEffect(() => {
     const cls = "menu-open";
     if (isOpen) document.body.classList.add(cls);
     else document.body.classList.remove(cls);
     return () => document.body.classList.remove(cls);
   }, [isOpen]);
-
 
   useEffect(() => {
     setIsOpen(false);
@@ -40,6 +38,43 @@ const Header = () => {
       rounded
       className="fixed top-0 left-0 z-50 w-full bg-[#063942]/90 backdrop-blur-md shadow-md"
     >
+      {/* צד ימין – התחבר / התנתק / אדמין */}
+      <div className="flex items-center order-1 gap-6 md:order-none">
+        {!user && (
+          <Navbar.Link
+            as={Link}
+            to="/login"
+            onClick={() => setIsOpen(false)}
+            className={`hover:underline hover:text-[#97BE5A] !text-white !text-xl ${location === "/login" ? "font-bold" : ""}`}
+          >
+            התחבר
+          </Navbar.Link>
+        )}
+
+        {user?.isAdmin && (
+          <Navbar.Link
+            as={Link}
+            to="/AdminPage"
+            onClick={() => setIsOpen(false)}
+            className={`hover:underline hover:text-[#97BE5A] !text-white !text-xl ${location === "/AdminPage" ? "font-bold" : ""}`}
+          >
+            Admin
+          </Navbar.Link>
+        )}
+
+        {user && (
+          <Navbar.Link
+            as={Link}
+            to="#"
+            onClick={() => { setIsOpen(false); logout(); }}
+            className="text-xl text-white hover:underline hover:text-red-500"
+          >
+            התנתק
+          </Navbar.Link>
+        )}
+      </div>
+
+      {/* צד שמאל – לוגו */}
       <Navbar.Brand
         as="button"
         onClick={() => {
@@ -47,7 +82,7 @@ const Header = () => {
           window.scrollTo({ top: 0, behavior: "smooth" });
           nav("/");
         }}
-        className="flex items-center gap-3 cursor-pointer"
+        className="flex items-center gap-3 cursor-pointer ms-auto"
       >
         <img
           src="/backgrounds/BarFLogo2.png"
@@ -56,26 +91,27 @@ const Header = () => {
         />
       </Navbar.Brand>
 
+      {/* תפריט מובייל */}
       <Navbar.Toggle onClick={toggleNavbar} />
-
       <Navbar.Collapse
-        className={`${isOpen ? "block" : "hidden"} md:flex md:items-center md:space-x-6 text-lg`}
+        className={`${isOpen ? "block" : "hidden"} md:hidden text-lg`}
       >
         {!user && (
           <>
+            {/* הרשמה תישאר רק במובייל */}
             <Navbar.Link
               as={Link}
               to="/register"
-              onClick={() => setIsOpen(false)} // ← נסגור תפריט
-              className={`hover:underline hover:text-[#97BE5A] !text-white !text-2xl ${location === "/register" ? "font-bold" : ""}`}
+              onClick={() => setIsOpen(false)}
+              className={`hover:underline hover:text-[#97BE5A] !text-white !text-xl ${location === "/register" ? "font-bold" : ""}`}
             >
               הרשמה
             </Navbar.Link>
             <Navbar.Link
               as={Link}
               to="/login"
-              onClick={() => setIsOpen(false)} // ← נסגור תפריט
-              className={`hover:underline hover:text-[#97BE5A] !text-white !text-2xl ${location === "/login" ? "font-bold" : ""}`}
+              onClick={() => setIsOpen(false)}
+              className={`hover:underline hover:text-[#97BE5A] !text-white !text-xl ${location === "/login" ? "font-bold" : ""}`}
             >
               התחבר
             </Navbar.Link>
@@ -86,8 +122,8 @@ const Header = () => {
           <Navbar.Link
             as={Link}
             to="/AdminPage"
-            onClick={() => setIsOpen(false)} // ← נסגור תפריט
-            className={`hover:underline hover:text-[#97BE5A] !text-white !text-2xl ${location === "/AdminPage" ? "font-bold" : ""}`}
+            onClick={() => setIsOpen(false)}
+            className={`hover:underline hover:text-[#97BE5A] !text-white !text-xl ${location === "/AdminPage" ? "font-bold" : ""}`}
           >
             Admin
           </Navbar.Link>
@@ -97,8 +133,8 @@ const Header = () => {
           <Navbar.Link
             as={Link}
             to="#"
-            onClick={() => { setIsOpen(false); logout(); }} // ← נסגור תפריט לפני יציאה
-            className="text-2xl text-white hover:underline hover:text-red-500"
+            onClick={() => { setIsOpen(false); logout(); }}
+            className="text-xl text-white hover:underline hover:text-red-500"
           >
             התנתק
           </Navbar.Link>
