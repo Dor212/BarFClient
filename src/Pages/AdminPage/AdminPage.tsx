@@ -177,7 +177,7 @@ const AdminPage = () => {
                         >
                             {client.files.map((file) => {
                                 const fileUrl = `${API_BASE}${file.path}`;
-                                const isImage = /\.(jpg|jpeg|png|gif)$/i.test(file.filename); // ← תיקון הריג'אקס
+                                const isImage = /\.(jpg|jpeg|png|gif)$/i.test(file.filename); 
                                 const isPdf = /\.(pdf)$/i.test(file.filename);
                                 const isXls = /\.(xls|xlsx)$/i.test(file.filename);
                                 const isDoc = /\.(doc|docx)$/i.test(file.filename);

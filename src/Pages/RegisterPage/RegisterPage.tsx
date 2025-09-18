@@ -28,7 +28,7 @@ const RegisterPage = () => {
         phone: "",
         email: "",
         password: "",
-        rememberMe: true, // ברירת מחדל - לזכור את המכשיר
+        rememberMe: true, 
     };
 
     const {
@@ -43,22 +43,17 @@ const RegisterPage = () => {
 
     const onSubmit = async (form: RegisterForm) => {
         try {
-            // 1) רישום
             await api.post("/users/register", {
                 name: form.name,
                 phone: form.phone,
                 email: form.email,
                 password: form.password,
             });
-
-            // 2) התחברות אוטומטית עם rememberMe
             await api.post("/users/login", {
                 email: form.email,
                 password: form.password,
                 rememberMe: form.rememberMe,
             });
-
-            // 3) משיכת המשתמש המחובר ועדכון Redux
             const me = await api.get("/users/me");
             dispatch(userActions.login(me.data));
 

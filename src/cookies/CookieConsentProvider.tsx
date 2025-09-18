@@ -3,7 +3,7 @@ import { createContext, useContext, useEffect, useMemo, useState, ReactNode } fr
 /** ========= Types ========= */
 
 type ConsentCategories = {
-    essential: true;          // תמיד פעיל
+    essential: true;          
     analytics: boolean;
     marketing: boolean;
 };
@@ -35,16 +35,14 @@ type GtagFunction = {
     (command: "consent", action: "default" | "update", params: Partial<Record<GtagConsentModeKeys, GtagConsentState>>): void;
     (command: "js", date: Date): void;
     (command: "config", measurementId: string, params?: Record<string, unknown>): void;
-    (command: "event", eventName: string, params?: Record<string, unknown>): void;
-    // fallback (לא משתמשים ב-any)
+    (command: "event", eventName: string, params?: Record<string, unknown>): void
     (...args: unknown[]): void;
 };
 
-/** Facebook Pixel typings (מינימליים) */
+
 type Fbq = {
     (method: "init", pixelId: string): void;
     (method: "track", eventName: string, params?: Record<string, unknown>): void;
-    // fallback
     (...args: unknown[]): void;
 } & {
     loaded?: boolean;
@@ -54,7 +52,6 @@ type Fbq = {
     version?: string;
 };
 
-/** הרחבת window בצורה בטוחה */
 declare global {
     interface Window {
         dataLayer?: unknown[];
@@ -84,8 +81,8 @@ function saveConsent(rec: ConsentRecord): void {
 
 /** ========= ENV ========= */
 
-const GA_ID = import.meta.env.VITE_GA_ID as string | undefined;                 // G-XXXXXX
-const META_PIXEL_ID = import.meta.env.VITE_META_PIXEL_ID as string | undefined; // מספר ארוך
+const GA_ID = import.meta.env.VITE_GA_ID as string | undefined;                 
+const META_PIXEL_ID = import.meta.env.VITE_META_PIXEL_ID as string | undefined; 
 
 /** ========= Google Consent Mode v2 ========= */
 
@@ -130,7 +127,6 @@ function loadGAScriptOnce(): void {
 
     const gtag = ensureGtag();
     gtag("js", new Date());
-    // ננהל page_view בעצמנו ב-SPA (send_page_view:false), או תוכל לשנות ל-true אם אין Router
     gtag("config", GA_ID, { send_page_view: false });
 
     window._gaLoaded = true;
@@ -177,7 +173,7 @@ function deleteCookie(name: string): void {
     document.cookie = `${name}=; Max-Age=0; path=/; SameSite=Lax`;
 }
 
-// מנקה קוקיז נפוצים כשאין הסכמה
+
 function cleanupTrackingCookies(allowAnalytics: boolean, allowMarketing: boolean): void {
     if (!allowAnalytics) {
         deleteCookie("_ga");

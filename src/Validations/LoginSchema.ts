@@ -13,7 +13,6 @@ export const LoginSchema = joi.object({
 
   password: joi
     .string()
-    // אות גדולה, אות קטנה, מספר, תו מיוחד, אורך 7–20
     .ruleset.pattern(/((?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*-]).{7,20})/)
     .rule({
       message:
@@ -21,6 +20,5 @@ export const LoginSchema = joi.object({
     })
     .required(),
 
-  // ✅ זה מה שחסר וגרם לשגיאה "object.unknown"
   rememberMe: joi.boolean().default(true),
 });
