@@ -92,16 +92,15 @@ const Header = () => {
       <Navbar.Toggle onClick={toggleNavbar} />
       <Navbar.Collapse className={`${isOpen ? "block" : "hidden"} md:hidden text-lg`}>
         {!user && (
-          <>
-            <Navbar.Link
-              as={Link}
-              to="/register"
-              onClick={() => setIsOpen(false)}
-              className={`hover:underline hover:text-[#97BE5A] !text-white !text-xl ${location === "/register" ? "font-bold" : ""}`}
-            >
-              הרשמה
-            </Navbar.Link>
-          </>
+          <Navbar.Link
+            as={Link}
+            to="/login"
+            onClick={() => setIsOpen(false)}
+            className={`hover:underline hover:text-[#97BE5A] !text-white !text-xl ${location === "/login" ? "font-bold" : ""
+              }`}
+          >
+            התחבר
+          </Navbar.Link>
         )}
 
         {user?.isAdmin && (
@@ -109,7 +108,8 @@ const Header = () => {
             as={Link}
             to="/AdminPage"
             onClick={() => setIsOpen(false)}
-            className={`hover:underline hover:text-[#97BE5A] !text-white !text-xl ${location === "/AdminPage" ? "font-bold" : ""}`}
+            className={`hover:underline hover:text-[#97BE5A] !text-white !text-xl ${location === "/AdminPage" ? "font-bold" : ""
+              }`}
           >
             Admin
           </Navbar.Link>
@@ -119,13 +119,17 @@ const Header = () => {
           <Navbar.Link
             as={Link}
             to="#"
-            onClick={() => { setIsOpen(false); logout(); }}
+            onClick={() => {
+              setIsOpen(false);
+              logout();
+            }}
             className="text-xl text-white hover:underline hover:text-red-500"
           >
             התנתק
           </Navbar.Link>
         )}
       </Navbar.Collapse>
+
     </Navbar>
   );
 };
