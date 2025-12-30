@@ -1,4 +1,3 @@
-import React from "react";
 import { FaWhatsapp, FaFacebook, FaInstagram } from "react-icons/fa";
 
 export default function FixedSocialButtons() {

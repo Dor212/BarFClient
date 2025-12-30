@@ -1,4 +1,4 @@
-import React from "react";
+
 
 const TermsPage: React.FC = () => {
     const brandName = "בר פליישקר";

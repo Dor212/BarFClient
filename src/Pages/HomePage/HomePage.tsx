@@ -1,4 +1,3 @@
-import React from "react";
 import { Helmet } from "react-helmet";
 import { ScrollProgress } from "./components/ScrollProgress";
 import { Reveal } from "./components/Reveal";
