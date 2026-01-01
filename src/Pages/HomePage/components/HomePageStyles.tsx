@@ -5,23 +5,6 @@ export default function HomePageStyles() {
         <style>{`
             html, body { overflow-x: hidden; overscroll-behavior-x: none; }
             #root { overflow-x: hidden; }
-
-            .page-bg {
-                background-image: url('/backgrounds/BG1.png');
-                background-repeat: no-repeat;
-                background-size: cover;
-                background-position: center;
-                background-color: #0b2f36;
-                background-attachment: fixed;
-            }
-
-            @media (max-width: 768px) {
-                .page-bg {
-                    background-image: url('/backgrounds/BG1m.png');
-                    background-attachment: scroll;
-                }
-            }
-
             .animated-gradient-border {
                 background: linear-gradient(120deg, #063942, #D1F96D, #97BE5A, #063942);
                 background-size: 300% 300%;
