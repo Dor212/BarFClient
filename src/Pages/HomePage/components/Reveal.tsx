@@ -11,11 +11,11 @@ type Props = {
 
 export const Reveal: React.FC<Props> = ({ children, className, id, dir, amount = 0.18 }) => {
     const ref = useRef<HTMLElement | null>(null);
-    const inView = useInView(ref, { amount, margin: "0px 0px -10% 0px" });
+    const inView = useInView(ref, { amount, margin: "0px 0px -10% 0px", once: true });
 
     const variants = useMemo(() => {
         return {
-            hidden: { opacity: 0, y: 28 },
+            hidden: { opacity: 0, y: 18 },
             visible: { opacity: 1, y: 0 },
         };
     }, []);

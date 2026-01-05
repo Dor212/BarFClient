@@ -7,6 +7,15 @@ html,
 body {
   overflow-x: hidden;
   overscroll-behavior-x: none;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 
 #root {
@@ -29,7 +38,7 @@ body {
 }
 
 .animated-gradient-border {
-  background: linear-gradient(120deg, #063942, #D1F96D, #97BE5A, #063942);
+  background: linear-gradient(120deg, #063942, #d1f96d, #97be5a, #063942);
   background-size: 300% 300%;
   animation: borderFlow 6.5s ease-in-out infinite;
   padding: 3px;
@@ -48,7 +57,7 @@ body {
 }
 
 .animated-gradient-border-inner {
-  background: #FFF8F8;
+  background: #fff8f8;
 }
 
 .fixed-social-buttons {
@@ -90,7 +99,7 @@ body {
     #fdf497 5%,
     #fd5949 45%,
     #d6249f 60%,
-    #285AEB 90%
+    #285aeb 90%
   );
 }
 

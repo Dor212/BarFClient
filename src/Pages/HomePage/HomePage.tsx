@@ -2,8 +2,6 @@ import { Helmet } from "react-helmet";
 import { ScrollProgress } from "./components/ScrollProgress";
 import { Reveal } from "./components/Reveal";
 import { SectionTitle } from "./components/SectionTitle";
-
-
 import FAQSection from "../../components/Sections/FAQSection";
 import AboutSection from "./components/AboutSection";
 import ArticlesSection from "./components/ArticlesSection";
@@ -79,7 +77,8 @@ const HomePage = () => {
             <ScrollProgress />
             <h1 className="sr-only">בר פליישקר – יועץ פיננסי מוסמך</h1>
 
-            <div className="page-bg w-full min-h-screen overflow-x-hidden pt-20 text-[#3B3024] font-serif">
+            <div className="page-bg w-full min-h-screen overflow-x-hidden pt-20 text-[#3B3024] font-serif" dir="rtl">
+
                 <FixedSocialButtons />
 
                 <Reveal id="logo" className="h-[100vh] flex items-center justify-center py-2 md:py-0">
