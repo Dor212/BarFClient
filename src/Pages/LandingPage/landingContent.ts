@@ -34,7 +34,7 @@ export const landingContent = {
     media: {
       initialFlowImage: "/landing/tazrim1.jpeg",
       finalFlowImage: "/landing/tazrim2.jpeg",
-      testimonialVideo: "/landing/zog.mp4",
+      testimonialVideo: "https://res.cloudinary.com/dtjr9qzet/video/upload/v1774258490/zog_ssrjfg.mp4",
     },
   },
   process: {
@@ -78,7 +78,7 @@ export const landingContent = {
       "/landing/WhatsAppImage4.jpeg",
       "/landing/WhatsAppImage5.jpeg",
     ],
-    videos: ["/landing/IKvideo.mp4", "/landing/SVvideo.mp4"],
+    videos: ["https://res.cloudinary.com/dtjr9qzet/video/upload/v1774259926/IKvideo_1_aeojlx.mp4", "https://res.cloudinary.com/dtjr9qzet/video/upload/v1774259957/SVvideo_1_ohzgzl.mp4"],
   },
   about: {
     title: "נעים מאוד, אני בר פליישקר",
