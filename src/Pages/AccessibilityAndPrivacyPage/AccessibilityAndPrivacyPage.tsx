@@ -48,7 +48,7 @@ const AccessibilityAndPrivacyPage: React.FC = () => {
 
             <div className="flex flex-col items-center justify-around gap-2 p-4 mb-8 border border-gray-200 shadow-lg rounded-xl bg-gradient-to-r from-gray-50 to-white sm:flex-row">
                 <div className="text-center">
-                    <strong>תאריך עדכון:</strong> {lastUpdated}
+                   
                 </div>
                 <div className="text-center">
                     <strong>יצירת קשר:</strong>{" "}

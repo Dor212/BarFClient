@@ -53,7 +53,6 @@ export default function FAQSection() {
             aria-labelledby="faq-title"
         >
             <div className="relative w-full max-w-3xl p-6 transition-shadow duration-300 bg-white border border-gray-200 shadow-lg rounded-2xl hover:shadow-xl">
-                {/* אייקון עגול למעלה */}
                 <div className="absolute top-[-30px] left-1/2 transform -translate-x-1/2 bg-[#D1F96D] w-16 h-16 flex items-center justify-center rounded-full shadow-md border-4 border-white">
                     <span className="text-[#063942] text-2xl font-bold">?</span>
                 </div>
@@ -70,8 +69,6 @@ export default function FAQSection() {
                         כל מה שרציתם לדעת על התהליך <br></br> בצורה ברורה וקצרה.
                     </p>
                 </div>
-
-                {/* אקורדיון */}
                 <div className="overflow-hidden border border-gray-200 divide-y divide-gray-200 rounded-xl">
                     {faqs.map((item, i) => {
                         const isOpen = open === i;

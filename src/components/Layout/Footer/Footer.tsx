@@ -7,7 +7,7 @@ const Footer = () => {
     return (
         <FbFooter container className="bg-[#063942] text-white">
             <div className="flex flex-col items-center w-full gap-3 py-4">
-                {/* זכויות יוצרים */}
+        
                 <FbFooter.Copyright
                     href="#"
                     by="Y.M.A"
@@ -15,7 +15,6 @@ const Footer = () => {
                     className="text-slate-200"
                 />
 
-                {/* קישורים */}
                 <FbFooter.LinkGroup className="flex flex-wrap justify-center gap-4 text-sm">
                     <FbFooter.Link
                         href="/accessibility"
