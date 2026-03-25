@@ -34,7 +34,20 @@ export default function HeroSection() {
                   key={item}
                   className="inline-flex items-center gap-2 text-right text-[0.94rem] font-medium leading-5 text-white/88 sm:text-[0.99rem] sm:leading-6"
                 >
-                  <span className="text-[#d9ff73]">✔</span>
+                  <svg
+                    viewBox="0 0 20 20"
+                    aria-hidden="true"
+                    className="h-4 w-4 shrink-0 text-[#d9ff73]"
+                    fill="none"
+                  >
+                    <path
+                      d="M4.5 10.5l3 3 8-8"
+                      stroke="currentColor"
+                      strokeWidth="2.4"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
                   <span>{item}</span>
                 </div>
               ))}
