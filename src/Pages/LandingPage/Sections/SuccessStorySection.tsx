@@ -24,11 +24,18 @@ export default function SuccessStorySection() {
             </h2>
 
             <div className="mx-auto mt-4 max-w-3xl space-y-2 text-[0.98rem] leading-6 text-white/86 sm:text-[1.05rem] sm:leading-7">
-              <p>{landingContent.successStory.description[0]}</p>
+              <p>
+                אחרי תהליך ליווי מסודר,<br />
+                הם עברו לתזרים חיובי של ₪6,292 בחודש.
+              </p>
               <p className="text-lg font-extrabold leading-7 text-[#d9ff73] sm:text-[1.45rem] sm:leading-8">
                 {landingContent.successStory.description[1]}
               </p>
-              <p>{landingContent.successStory.description[2]}</p>
+              <p>
+                אחרי שחיסלנו את המינוס והחובות,<br />
+                הכסף הזה הולך היום ישירות לחסכונות חכמים<br />
+                ולהון עצמי לדירה הראשונה שלהם.
+              </p>
             </div>
 
             <div className="flex items-stretch justify-center gap-2 mt-5 sm:gap-3">

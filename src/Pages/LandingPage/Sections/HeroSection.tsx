@@ -53,7 +53,7 @@ export default function HeroSection() {
                 {landingContent.fit.items.map((item) => (
                   <div
                     key={item}
-                    className="inline-flex items-start justify-center gap-2 text-center text-[0.95rem] leading-5 text-white/88 sm:text-[0.99rem] sm:leading-6"
+                    className="inline-flex items-start justify-center gap-2 text-center text-[0.88rem] leading-5 text-white/88 whitespace-nowrap sm:text-[0.99rem] sm:leading-6"
                   >
                     <span className="mt-[2px] text-[#8ef2ff]">•</span>
                     <span>{item}</span>
