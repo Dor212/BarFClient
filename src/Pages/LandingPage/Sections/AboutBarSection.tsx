@@ -25,9 +25,11 @@ export default function AboutBarSection() {
             </div>
 
             <h2 className="mx-auto mt-6 max-w-4xl text-[1.95rem] font-black leading-[1.04] sm:mt-7 sm:text-4xl lg:text-[3.15rem]">
-              <span className="bg-[linear-gradient(90deg,#d9ff73_0%,#8ef2ff_52%,#ffffff_100%)] bg-clip-text text-transparent">
-                <span className="block">נעים מאוד,</span>
-                <span className="block">אני בר פליישקר</span>
+              <span className="block bg-[linear-gradient(90deg,#d9ff73_0%,#8ef2ff_52%,#ffffff_100%)] bg-clip-text text-transparent">
+                נעים מאוד,
+              </span>
+              <span className="block bg-[linear-gradient(90deg,#d9ff73_0%,#8ef2ff_52%,#ffffff_100%)] bg-clip-text text-transparent">
+                אני בר פליישקר
               </span>
             </h2>
 
