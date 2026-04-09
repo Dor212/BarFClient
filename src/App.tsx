@@ -9,14 +9,17 @@ import AuthLoader from "./components/Layout/AuthLoader.tsx";
 import AccessibilityAndPrivacyPage from "./Pages/AccessibilityAndPrivacyPage/AccessibilityAndPrivacyPage.tsx";
 import TermsPage from "./Pages/TermsPage/TermsPage.tsx";
 import LandingPage from "./Pages/LandingPage/LandingPage";
+import GuideLandingPage from "./Pages/GuideLandingPage/GuideLandingPage";
 
 function App() {
   const location = useLocation();
   const isLandingRoute = location.pathname === "/landing";
+  const isGuideRoute = location.pathname === "/guide";
+  const isMinimalRoute = isLandingRoute || isGuideRoute;
 
   return (
     <div className="relative isolate min-h-[100svh] text-white">
-      {!isLandingRoute ? (
+      {!isMinimalRoute ? (
         <>
           <div
             className="fixed inset-0 z-0 bg-scroll bg-center bg-no-repeat bg-cover md:bg-fixed"
@@ -32,6 +35,12 @@ function App() {
           />
           <div className="fixed inset-0 z-0 bg-black/35" />
         </>
+      ) : isGuideRoute ? (
+        <>
+          <div className="fixed inset-0 z-0 bg-[radial-gradient(circle_at_top,rgba(209,249,109,0.1),transparent_22%),linear-gradient(180deg,#03171d_0%,#062a33_36%,#073d4a_68%,#03161c_100%)]" />
+          <div className="fixed inset-0 z-0 bg-[radial-gradient(circle_at_16%_14%,rgba(209,249,109,0.16),transparent_18%),radial-gradient(circle_at_82%_18%,rgba(34,211,238,0.16),transparent_22%),radial-gradient(circle_at_50%_82%,rgba(59,130,246,0.12),transparent_24%)]" />
+          <div className="fixed inset-0 z-0 bg-[linear-gradient(130deg,rgba(255,255,255,0.04)_0,rgba(255,255,255,0)_30%,rgba(255,255,255,0.03)_56%,rgba(255,255,255,0)_100%)] opacity-80" />
+        </>
       ) : (
         <>
           <div className="fixed inset-0 z-0 bg-[radial-gradient(circle_at_top,rgba(209,249,109,0.16),transparent_22%),linear-gradient(180deg,#051f26_0%,#07303a_28%,#0a4553_58%,#062a33_100%)]" />
@@ -41,14 +50,15 @@ function App() {
       )}
 
       <div className="relative z-10 min-h-[100svh]">
-        {!isLandingRoute ? <AuthLoader /> : null}
-        {!isLandingRoute ? <Header /> : null}
+        {!isMinimalRoute ? <AuthLoader /> : null}
+        {!isMinimalRoute ? <Header /> : null}
 
-        <main id="main" className={isLandingRoute ? "" : "pt-20"}>
+        <main id="main" className={isMinimalRoute ? "" : "pt-20"}>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/home" element={<HomePage />} />
             <Route path="/landing" element={<LandingPage />} />
+            <Route path="/guide" element={<GuideLandingPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/AdminPage" element={<AdminPage />} />
             <Route path="/login" element={<LoginPage />} />
@@ -57,7 +67,7 @@ function App() {
           </Routes>
         </main>
 
-        {!isLandingRoute ? <Footer /> : null}
+        {!isMinimalRoute ? <Footer /> : null}
       </div>
     </div>
   );
