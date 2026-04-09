@@ -1,99 +1,128 @@
-import { Helmet } from "react-helmet";
-import { Download, FileText } from "lucide-react";
+const statChips = ["5 צעדים פשוטים", "שפה ברורה", "סדר כלכלי"];
 
-const guideBullets = [
-  "5 שלבים פשוטים שאפשר ליישם כבר מהיום",
-  "שפה ברורה ואנושית בלי מילים מסובכות",
-  "התחלה חכמה לסדר כלכלי אמיתי בבית",
+const infoRows = [
+  "מדריך קצר ומדויק",
+  "בלי לחץ ובלי בלגן",
+  "להורדה מיידית",
 ];
 
 export default function GuideLandingPage() {
   return (
-    <>
-      <Helmet>
-        <title>המדריך החינמי לזוגות צעירים | בר פליישקר</title>
-        <meta
-          name="description"
-          content="מדריך חינמי, קצר ומעשי לזוגות צעירים ולהורים טריים שרוצים להתחיל לעשות סדר כלכלי ברור, בלי לחץ ובלי בלגן."
+    <section
+      dir="rtl"
+      className="relative isolate h-[100svh] overflow-hidden bg-[#041e25] px-3 py-3 text-white"
+    >
+      <style>{`
+        @keyframes guidePulse {
+          0%, 100% { opacity: .45; transform: scale(1); }
+          50% { opacity: .82; transform: scale(1.04); }
+        }
+        @keyframes guideGlow {
+          0%, 100% { opacity: .55; }
+          50% { opacity: .95; }
+        }
+      `}</style>
+
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(209,249,109,0.13),transparent_24%),radial-gradient(circle_at_16%_24%,rgba(151,190,90,0.08),transparent_18%),linear-gradient(180deg,#041e25_0%,#063942_52%,#042731_100%)]" />
+        <div
+          className="absolute left-1/2 top-1/2 h-[18rem] w-[18rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(209,249,109,0.14)_0%,rgba(209,249,109,0.05)_34%,rgba(255,255,255,0)_68%)] blur-2xl"
+          style={{ animation: "guidePulse 7s ease-in-out infinite" }}
         />
-        <meta name="robots" content="noindex,nofollow" />
-        <link rel="canonical" href="https://barflyshker.com/guide" />
-      </Helmet>
+        <div className="absolute left-1/2 top-1/2 h-[20rem] w-[20rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/5" />
+        <div className="absolute left-1/2 top-1/2 h-[15.5rem] w-[15.5rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#D1F96D]/12" />
+        <div className="absolute inset-x-0 top-[14%] h-px bg-gradient-to-r from-transparent via-[#97BE5A]/25 to-transparent" />
+        <div className="absolute inset-x-0 bottom-[14%] h-px bg-gradient-to-r from-transparent via-[#D1F96D]/20 to-transparent" />
+        <div className="absolute right-6 top-7 h-16 w-16 rounded-full border border-[#D1F96D]/18 bg-[#D1F96D]/6 blur-[1px]" />
+        <div className="absolute left-4 bottom-8 h-12 w-12 rounded-full border border-white/8 bg-white/[0.02]" />
+      </div>
 
-      <section dir="rtl" className="relative min-h-[100svh] overflow-hidden text-white">
-        <div className="pointer-events-none absolute inset-0 opacity-[0.08] [background-image:linear-gradient(rgba(255,255,255,0.55)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.55)_1px,transparent_1px)] [background-size:34px_34px]" />
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0))]" />
-        <div className="pointer-events-none absolute -right-24 top-20 h-72 w-72 rounded-full bg-[#D1F96D]/18 blur-3xl" />
-        <div className="pointer-events-none absolute -left-24 bottom-16 h-80 w-80 rounded-full bg-cyan-400/16 blur-3xl" />
-        <div className="pointer-events-none absolute left-1/2 top-1/2 h-[32rem] w-[32rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/10 opacity-30" />
-        <div className="pointer-events-none absolute left-1/2 top-1/2 h-[40rem] w-[40rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/5 opacity-30" />
+      <div className="relative z-10 mx-auto flex h-full w-full max-w-[23rem] items-center justify-center">
+        <div className="relative w-full overflow-hidden rounded-[2rem] border border-white/12 bg-[linear-gradient(180deg,rgba(7,34,41,0.92)_0%,rgba(8,41,50,0.86)_54%,rgba(5,27,33,0.96)_100%)] px-4 py-4 shadow-[0_24px_90px_rgba(0,0,0,0.42)] backdrop-blur-xl sm:px-5 sm:py-5">
+          <div className="absolute inset-[1px] rounded-[calc(2rem-1px)] border border-white/6" />
+          <div className="absolute inset-0 bg-[linear-gradient(130deg,rgba(255,255,255,0.05)_0%,rgba(255,255,255,0)_24%,rgba(209,249,109,0.05)_55%,rgba(255,255,255,0)_82%,rgba(151,190,90,0.05)_100%)]" />
 
-        <div className="relative mx-auto flex min-h-[100svh] w-full max-w-7xl flex-col px-5 pb-10 pt-5 sm:px-8 lg:px-10">
-          <div className="flex items-center justify-end">
-            <img
-              src="/backgrounds/BarFLogo2.png"
-              alt="Bar Flyshker"
-              className="h-9 w-auto opacity-90 sm:h-10"
-            />
-          </div>
+          <div className="relative flex flex-col items-center text-center">
+            <div className="relative mb-3 flex h-[4.2rem] w-[4.2rem] items-center justify-center">
+              <div className="absolute inset-0 rounded-full border border-[#D1F96D]/28" />
+              <div className="absolute inset-[8px] rounded-full border border-[#97BE5A]/24" />
+              <div
+                className="absolute inset-[14px] rounded-full bg-[radial-gradient(circle,rgba(209,249,109,0.96)_0%,rgba(151,190,90,0.76)_52%,rgba(255,255,255,0)_74%)] blur-[1px]"
+                style={{ animation: "guideGlow 4.8s ease-in-out infinite" }}
+              />
+              <div className="relative h-3 w-3 rounded-full bg-white shadow-[0_0_18px_rgba(255,255,255,0.95)]" />
+            </div>
 
-          <div className="flex flex-1 items-center justify-center py-10 sm:py-12">
-            <div className="relative w-full max-w-4xl overflow-hidden rounded-[2rem] border border-white/12 bg-[linear-gradient(180deg,rgba(7,42,51,0.84),rgba(4,26,33,0.9))] p-[1px] shadow-[0_30px_120px_rgba(0,0,0,0.38)] backdrop-blur-2xl">
-              <div className="relative overflow-hidden rounded-[calc(2rem-1px)] border border-white/8 bg-[radial-gradient(circle_at_top,rgba(209,249,109,0.08),transparent_28%),linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] px-5 py-8 sm:px-8 sm:py-10 lg:px-12 lg:py-12">
-                <div className="pointer-events-none absolute inset-0 opacity-60 [background-image:linear-gradient(135deg,rgba(255,255,255,0.05)_0,rgba(255,255,255,0)_34%,rgba(209,249,109,0.08)_60%,rgba(255,255,255,0)_100%)]" />
-                <div className="pointer-events-none absolute right-5 top-5 h-12 w-12 rounded-full border border-[#D1F96D]/30" />
-                <div className="pointer-events-none absolute bottom-5 left-5 h-16 w-16 rounded-full border border-cyan-300/20" />
+            <h1 className="text-[1.95rem] font-black leading-[0.9] tracking-[-0.05em] sm:text-[2.3rem]">
+              <span className="block bg-[linear-gradient(90deg,#ffffff_0%,#edf7da_54%,#ffffff_100%)] bg-clip-text text-transparent">
+                לא משנה כמה
+              </span>
+              <span className="block bg-[linear-gradient(90deg,#D1F96D_0%,#97BE5A_58%,#efffb6_100%)] bg-clip-text text-transparent">
+                כסף נכנס,
+              </span>
+              <span className="block text-white">הוא תמיד נעלם?</span>
+            </h1>
 
-                <div className="relative mx-auto flex max-w-3xl flex-col items-center text-center">
-                  <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#D1F96D]/25 bg-white/5 px-4 py-2 text-[11px] font-medium tracking-[0.24em] text-[#DDF9A3] sm:text-xs">
-                    <span className="h-2 w-2 rounded-full bg-[#D1F96D] shadow-[0_0_12px_rgba(209,249,109,0.95)]" />
-                    מדריך חינמי לזוגות צעירים ולהורים טריים
-                  </div>
+            <p className="mt-2 max-w-[18.1rem] text-[0.84rem] leading-4 text-white/74 sm:max-w-[19rem] sm:text-[0.92rem] sm:leading-5">
+              מדריך קצר, ברור ומעשי שיעזור לכם להתחיל לעשות סדר כלכלי אמיתי, בלי מילים מסובכות ובלי בלגן.
+            </p>
 
-                  <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-cyan-300/15 bg-cyan-300/10 px-3 py-1.5 text-xs font-medium text-cyan-100/90">
-                    <FileText className="h-4 w-4" />
-                    קובץ PDF להורדה מיידית
-                  </div>
-
-                  <h1 className="max-w-3xl text-4xl font-black leading-[1.06] text-white sm:text-5xl lg:text-6xl">
-                    לא משנה כמה כסף נכנס,
-                    <span className="mt-2 block text-[#D1F96D]">הוא תמיד נעלם?</span>
-                  </h1>
-
-                  <p className="mt-5 max-w-2xl text-base leading-7 text-white/78 sm:text-lg sm:leading-8">
-                    מדריך קצר, ברור ומעשי שיעזור לכם להתחיל לעשות סדר כלכלי נכון,
-                    בלי לחץ, בלי בלגן ובלי מילים מסובכות.
-                  </p>
-
-                  <div className="mt-8 grid w-full gap-3 sm:grid-cols-3">
-                    {guideBullets.map((item) => (
-                      <div
-                        key={item}
-                        className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4 text-sm leading-6 text-white/86 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]"
-                      >
-                        {item}
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="mt-9 flex w-full flex-col items-center gap-3">
-                    <a
-                      href="/articles/guide1.pdf"
-                      download="bar-flyshker-guide.pdf"
-                      className="inline-flex min-h-[56px] items-center justify-center gap-2 rounded-full border border-[#D1F96D]/40 bg-[#D1F96D] px-7 text-base font-extrabold text-[#063942] shadow-[0_0_30px_rgba(209,249,109,0.22)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_42px_rgba(209,249,109,0.34)]"
-                    >
-                      <Download className="h-5 w-5" />
-                      להורדת המדריך
-                    </a>
-
-                    <p className="text-sm text-white/52">הורדה ישירה של הקובץ למכשיר</p>
-                  </div>
+            <div className="mt-3 flex flex-wrap justify-center gap-1.5">
+              {statChips.map((chip, index) => (
+                <div
+                  key={chip}
+                  className={`rounded-full border px-3 py-1.5 text-[0.73rem] font-bold backdrop-blur-md ${
+                    index === 0
+                      ? "border-[#D1F96D]/28 bg-[#D1F96D]/10 text-[#eefcb8]"
+                      : index === 1
+                        ? "border-[#97BE5A]/28 bg-[#97BE5A]/10 text-[#edf7da]"
+                        : "border-white/12 bg-white/[0.05] text-white/82"
+                  }`}
+                >
+                  {chip}
                 </div>
+              ))}
+            </div>
+
+            <div className="relative mt-3 w-full max-w-[16.8rem] overflow-hidden rounded-[1.35rem] border border-white/10 bg-white/[0.045] px-3 py-2.5 shadow-[0_10px_30px_rgba(0,0,0,0.18)]">
+              <div className="absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-[#D1F96D]/35 to-transparent" />
+              <div className="space-y-1.5">
+                {infoRows.map((row, index) => (
+                  <div
+                    key={row}
+                    className={`rounded-full border px-3 py-1.5 text-center text-[0.72rem] font-semibold ${
+                      index === 0
+                        ? "border-[#D1F96D]/20 bg-[#D1F96D]/8 text-[#eefcb8]"
+                        : index === 1
+                          ? "border-[#97BE5A]/20 bg-[#97BE5A]/8 text-[#edf7da]"
+                          : "border-white/8 bg-black/10 text-white/72"
+                    }`}
+                  >
+                    {row}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="w-full mt-3 space-y-2">
+              <a
+                href="/articles/guide1.pdf"
+                download="guide1.pdf"
+                className="group relative flex min-h-[3.15rem] w-full items-center justify-center overflow-hidden rounded-[1.35rem] border border-white/14 bg-[linear-gradient(90deg,#D1F96D_0%,#97BE5A_55%,#e4f7a7_100%)] px-4 text-[0.96rem] font-black text-[#06212a] shadow-[0_16px_36px_rgba(209,249,109,0.16)] transition duration-300 hover:-translate-y-0.5"
+              >
+                <span className="absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,0.28),rgba(255,255,255,0)_28%,rgba(255,255,255,0.12),rgba(255,255,255,0)_72%)] opacity-80 transition duration-300 group-hover:opacity-100" />
+                <span className="relative">להורדת המדריך</span>
+              </a>
+
+              <div className="flex items-center justify-center gap-2 text-[10px] text-white/45 sm:text-[11px]">
+                <span className="w-8 h-px bg-gradient-to-r from-transparent to-white/18" />
+                PDF להורדה ישירה
+                <span className="w-8 h-px bg-gradient-to-l from-transparent to-white/18" />
               </div>
             </div>
           </div>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }
