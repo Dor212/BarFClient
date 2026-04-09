@@ -7,6 +7,28 @@ const infoRows = [
 ];
 
 export default function GuideLandingPage() {
+  const handleDownload = async () => {
+    try {
+      const response = await fetch("/articles/guide1.pdf");
+      if (!response.ok) throw new Error("Failed to fetch PDF");
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "guide1.pdf";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Download failed:", error);
+      window.open("/articles/guide1.pdf", "_blank", "noopener,noreferrer");
+    }
+  };
+
   return (
     <section
       dir="rtl"
@@ -71,13 +93,12 @@ export default function GuideLandingPage() {
               {statChips.map((chip, index) => (
                 <div
                   key={chip}
-                  className={`rounded-full border px-3 py-1.5 text-[0.73rem] font-bold backdrop-blur-md ${
-                    index === 0
+                  className={`rounded-full border px-3 py-1.5 text-[0.73rem] font-bold backdrop-blur-md ${index === 0
                       ? "border-[#D1F96D]/28 bg-[#D1F96D]/10 text-[#eefcb8]"
                       : index === 1
                         ? "border-[#97BE5A]/28 bg-[#97BE5A]/10 text-[#edf7da]"
                         : "border-white/12 bg-white/[0.05] text-white/82"
-                  }`}
+                    }`}
                 >
                   {chip}
                 </div>
@@ -90,13 +111,12 @@ export default function GuideLandingPage() {
                 {infoRows.map((row, index) => (
                   <div
                     key={row}
-                    className={`rounded-full border px-3 py-1.5 text-center text-[0.72rem] font-semibold ${
-                      index === 0
+                    className={`rounded-full border px-3 py-1.5 text-center text-[0.72rem] font-semibold ${index === 0
                         ? "border-[#D1F96D]/20 bg-[#D1F96D]/8 text-[#eefcb8]"
                         : index === 1
                           ? "border-[#97BE5A]/20 bg-[#97BE5A]/8 text-[#edf7da]"
                           : "border-white/8 bg-black/10 text-white/72"
-                    }`}
+                      }`}
                   >
                     {row}
                   </div>
@@ -105,14 +125,14 @@ export default function GuideLandingPage() {
             </div>
 
             <div className="w-full mt-3 space-y-2">
-              <a
-                href="/articles/guide1.pdf"
-                download="guide1.pdf"
+              <button
+                type="button"
+                onClick={handleDownload}
                 className="group relative flex min-h-[3.15rem] w-full items-center justify-center overflow-hidden rounded-[1.35rem] border border-white/14 bg-[linear-gradient(90deg,#D1F96D_0%,#97BE5A_55%,#e4f7a7_100%)] px-4 text-[0.96rem] font-black text-[#06212a] shadow-[0_16px_36px_rgba(209,249,109,0.16)] transition duration-300 hover:-translate-y-0.5"
               >
                 <span className="absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,0.28),rgba(255,255,255,0)_28%,rgba(255,255,255,0.12),rgba(255,255,255,0)_72%)] opacity-80 transition duration-300 group-hover:opacity-100" />
                 <span className="relative">להורדת המדריך</span>
-              </a>
+              </button>
 
               <div className="flex items-center justify-center gap-2 text-[10px] text-white/45 sm:text-[11px]">
                 <span className="w-8 h-px bg-gradient-to-r from-transparent to-white/18" />
