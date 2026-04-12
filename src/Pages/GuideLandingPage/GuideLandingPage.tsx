@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import { api } from "../../api/axios";
+
 const statChips = ["5 צעדים פשוטים", "שפה ברורה", "סדר כלכלי"];
 
 const infoRows = [
@@ -28,6 +28,9 @@ export default function GuideLandingPage() {
   const [errors, setErrors] = useState<Partial<FormValues>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
+  const [botcheck, setBotcheck] = useState("");
+
+  const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
 
   const handleDownload = async () => {
     try {
@@ -95,22 +98,50 @@ export default function GuideLandingPage() {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    if (botcheck) {
+      return;
+    }
+
     const nextErrors = validateForm(formValues);
     setErrors(nextErrors);
 
     if (Object.keys(nextErrors).length > 0) return;
 
+    if (!accessKey) {
+      setSubmitError("חסר VITE_WEB3FORMS_ACCESS_KEY בקובץ הסביבה.");
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitError("");
 
     try {
-      await api.post("/users/guide-contact", {
-        fullName: formValues.fullName.trim(),
-        email: formValues.email.trim(),
-        phone: formValues.phone.trim(),
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: accessKey,
+          subject: "ליד חדש מדף המדריך | בר פליישקר",
+          from_name: "Bar Flyshker Guide",
+          botcheck: "",
+          fullName: formValues.fullName.trim(),
+          email: formValues.email.trim(),
+          phone: formValues.phone.trim(),
+        }),
       });
 
+      const result = await response.json();
+
+      if (!response.ok || result.success === false) {
+        throw new Error(result.message || result.body?.message || "Submission failed");
+      }
+
       setStep("download");
+      setFormValues(initialFormValues);
+      setBotcheck("");
     } catch (error) {
       console.error("Guide lead submit failed:", error);
       setSubmitError("משהו השתבש בשליחה. נסו שוב.");
@@ -246,6 +277,16 @@ export default function GuideLandingPage() {
                 </p>
 
                 <form onSubmit={handleSubmit} className="mt-5 space-y-3 text-right">
+                  <input
+                    type="text"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={botcheck}
+                    onChange={(event) => setBotcheck(event.target.value)}
+                    className="hidden"
+                    aria-hidden="true"
+                  />
+
                   <div>
                     <input
                       type="text"

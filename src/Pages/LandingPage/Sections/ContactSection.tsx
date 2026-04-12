@@ -1,5 +1,4 @@
 import { FormEvent, useState } from "react";
-import { api } from "../../../api/axios";
 import { landingContent } from "../landingContent";
 import SectionReveal from "../components/SectionReveal";
 
@@ -98,10 +97,13 @@ function FieldShell({ icon, children }: FieldProps) {
 export default function ContactSection() {
   const [formValues, setFormValues] = useState<LandingFormValues>(initialValues);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [botcheck, setBotcheck] = useState("");
   const [status, setStatus] = useState<{ type: "idle" | "success" | "error"; message: string }>({
     type: "idle",
     message: "",
   });
+
+  const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
 
   const questions: QuestionConfig[] = [
     {
@@ -137,17 +139,61 @@ export default function ContactSection() {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (botcheck) {
+      return;
+    }
+
+    if (!accessKey) {
+      setStatus({
+        type: "error",
+        message: "חסר VITE_WEB3FORMS_ACCESS_KEY בקובץ הסביבה.",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     setStatus({ type: "idle", message: "" });
 
     try {
-      await api.post("/users/landing-contact", formValues);
+      const payload = {
+        access_key: accessKey,
+        subject: "ליד חדש מדף הנחיתה | בר פליישקר",
+        from_name: "Bar Flyshker Landing",
+        botcheck: "",
+        fullName: formValues.fullName.trim(),
+        phone: formValues.phone.trim(),
+        email: formValues.email.trim(),
+        incomeRange: formValues.incomeRange,
+        financialState: formValues.financialState,
+        hasLiabilities: formValues.hasLiabilities,
+        hadBankIssues: formValues.hadBankIssues,
+        bestTime: formValues.bestTime,
+      };
+
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || result.success === false) {
+        throw new Error(result.message || result.body?.message || "Submission failed");
+      }
+
       setStatus({ type: "success", message: landingContent.contact.successMessage });
       setFormValues(initialValues);
-    } catch {
+      setBotcheck("");
+    } catch (error) {
+      console.error("Landing lead submit failed:", error);
       setStatus({
         type: "error",
-        message: "משהו השתבש בשליחה. בדקו שהשרת רץ ונסו שוב.",
+        message: "משהו השתבש בשליחה. נסו שוב.",
       });
     } finally {
       setIsSubmitting(false);
@@ -177,6 +223,16 @@ export default function ContactSection() {
           </div>
 
           <form className="relative mt-6" onSubmit={handleSubmit}>
+            <input
+              type="text"
+              tabIndex={-1}
+              autoComplete="off"
+              value={botcheck}
+              onChange={(event) => setBotcheck(event.target.value)}
+              className="hidden"
+              aria-hidden="true"
+            />
+
             <div className="grid gap-3 lg:grid-cols-[1.05fr_0.95fr] lg:gap-4">
               <div className="space-y-3">
                 <FieldShell icon={<UserIcon />}>
@@ -267,17 +323,18 @@ export default function ContactSection() {
               <p className="max-w-2xl text-center text-[0.9rem] leading-6 text-white/70 sm:text-[0.95rem] sm:leading-7">
                 {landingContent.contact.note}
               </p>
-              
+
               <p className="max-w-2xl text-center text-[0.82rem] leading-5 text-white/55 sm:text-[0.88rem]">
                 השארת הפרטים מהווה הסכמה ליצירת קשר ולמדיניות הפרטיות של האתר.
               </p>
 
               {status.type !== "idle" ? (
                 <div
-                  className={`w-full max-w-2xl rounded-[1rem] px-4 py-3 text-center text-sm font-medium ${status.type === "success"
+                  className={`w-full max-w-2xl rounded-[1rem] px-4 py-3 text-center text-sm font-medium ${
+                    status.type === "success"
                       ? "border border-[#d9ff73]/20 bg-[#d9ff73]/10 text-[#d9ff73]"
                       : "border border-red-400/20 bg-red-500/10 text-red-200"
-                    }`}
+                  }`}
                 >
                   {status.message}
                 </div>
