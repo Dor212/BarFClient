@@ -1,6 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { api } from "../../api/axios";
-
 const statChips = ["5 צעדים פשוטים", "שפה ברורה", "סדר כלכלי"];
 
 const infoRows = [
@@ -105,16 +104,15 @@ export default function GuideLandingPage() {
     setSubmitError("");
 
     try {
-      await api.post("/users/landing-contact", {
+      await api.post("/users/guide-contact", {
         fullName: formValues.fullName.trim(),
         email: formValues.email.trim(),
         phone: formValues.phone.trim(),
-        leadSource: "guide-download",
       });
 
       setStep("download");
     } catch (error) {
-      console.error("Lead submit failed:", error);
+      console.error("Guide lead submit failed:", error);
       setSubmitError("משהו השתבש בשליחה. נסו שוב.");
     } finally {
       setIsSubmitting(false);
