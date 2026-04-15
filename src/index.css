@@ -3,13 +3,28 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  color-scheme: dark;
+  background-color: #041e25;
+}
+
 html,
 body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  background: #041e25;
   overflow-x: hidden;
   overscroll-behavior-x: none;
   overflow-y: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+html {
+  background-color: #041e25;
+  -webkit-text-size-adjust: 100%;
 }
 
 html::-webkit-scrollbar,
@@ -19,7 +34,10 @@ body::-webkit-scrollbar {
 }
 
 #root {
+  min-height: 100vh;
+  min-height: 100dvh;
   overflow-x: hidden;
+  background: #041e25;
 }
 
 body {
